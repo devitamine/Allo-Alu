@@ -181,11 +181,24 @@
                     </div>
                     
                     <div class="flex-1 py-4 flex flex-col space-y-3 overflow-hidden text-[10px]">
-                        <div class="self-start max-w-[85%] bg-cosmic-800 p-3 rounded-2xl rounded-tl-none border border-white/5">
-                            <p class="text-slate-200">Wait, so the app itself is completely free? No premium monthly fee?</p>
+                        <div class="self-start max-w-[85%] bg-cosmic-800 p-2.5 rounded-2xl rounded-tl-none border border-white/5">
+                            <p class="text-slate-200">Wait, so the app itself is completely free? No premium fees?</p>
                         </div>
-                        <div class="self-end max-w-[85%] bg-gradient-to-r from-cosmic-accent/20 to-cosmic-glow/20 p-3 rounded-2xl rounded-tr-none border border-cosmic-accent/30">
-                            <p class="text-white">Exactly! 100% free with no ads. The only cost is 0.001 ALGO per message, paid directly to the Algorand network as gas fee!</p>
+                        <div class="self-end max-w-[85%] bg-gradient-to-r from-cosmic-accent/20 to-cosmic-glow/20 p-2.5 rounded-2xl rounded-tr-none border border-cosmic-accent/30">
+                            <p class="text-white">Exactly! 100% free with no ads. The only cost is 0.001 ALGO per message paid to the network!</p>
+                        </div>
+                        <div class="self-end max-w-[85%] bg-gradient-to-r from-cosmic-accent/20 to-cosmic-glow/20 p-2.5 rounded-2xl rounded-tr-none border border-cosmic-accent/30 flex flex-col space-y-1.5">
+                            <div class="relative rounded-lg overflow-hidden border border-white/10 shadow-md">
+                                <div class="w-full h-24 bg-gradient-to-br from-cosmic-950 via-cosmic-900 to-cosmic-800 flex flex-col items-center justify-center text-center p-2">
+                                    <span class="text-base mb-1">🖼️</span>
+                                    <span class="text-[8px] font-mono font-bold text-cosmic-accent uppercase tracking-wider">Encrypted IPFS Media</span>
+                                    <span class="text-[7px] text-slate-400 mt-0.5">Hash: QmZ...8vPq</span>
+                                </div>
+                                <div class="absolute bottom-1 right-1 bg-black/60 px-1 py-0.5 rounded text-[6px] text-slate-300 font-mono">
+                                    Pinata Cloud
+                                </div>
+                            </div>
+                            <p class="text-white text-[9px]">Check out this encrypted photo sent via decentralized IPFS!</p>
                         </div>
                     </div>
 
@@ -552,6 +565,85 @@
                 <div class="p-3 bg-cosmic-950 rounded-xl border border-white/5 flex items-center justify-between">
                     <span class="text-xs text-amber-300 font-mono">SYSTEM_ALERT: INSUFFICIENT_FUNDS</span>
                     <span class="text-[10px] bg-amber-500/20 text-amber-400 px-2.5 py-0.5 rounded font-mono font-bold">LOCKED</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Promotion & X/Twitter Kit -->
+    <section id="promo-kit" class="py-24 px-6 md:px-12 max-w-7xl mx-auto relative border-t border-white/5">
+        <div class="absolute -top-10 left-1/4 w-80 h-80 bg-cosmic-glow/10 blur-[130px] rounded-full pointer-events-none"></div>
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="text-xs font-mono font-bold text-cosmic-accent uppercase tracking-widest">Share the Revolution</span>
+            <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white font-mono mt-2">
+                X/Twitter & Community Kit
+            </h2>
+            <p class="text-slate-400 mt-4 text-base md:text-lg">
+                Help us spread the word! Below are ready-to-use post templates tailored for X (Twitter) and the Algorand community to introduce Allo•Alu.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Template 1: Main Announcement -->
+            <div class="p-8 rounded-2xl glass-panel border border-white/5 flex flex-col justify-between">
+                <div>
+                    <span class="text-xs font-mono font-bold text-cosmic-accent uppercase tracking-wider block mb-2">📢 Main App Launch Post</span>
+                    <h4 class="text-lg font-bold text-white mb-4">Introduce Allo•Alu to Web3</h4>
+                    <div class="p-4 bg-cosmic-950/80 rounded-xl border border-white/5 font-sans text-xs text-slate-300 leading-relaxed select-all">
+🚀 Introducing Allo•Alu — a 100% server-less, open-source Android messenger built on @Algorand! 
+
+No ads, no monthly fees, and total cryptographic sovereignty. 
+
+Key features:
+🔒 E2E Encrypted Chat via Algorand payloads
+🖼️ Decentralized secure image sharing (via @PinataCloud IPFS)
+📝 Private On-Chain Notepad (encrypted with your own keys)
+
+Gas is just 0.001 ALGO per message (~$0.0001)! 
+
+Download the APK here: https://github.com/devitamine/Allo-Alu/releases
+
+#Algorand $ALGO #Web3 #IPFS #OpenSource
+                    </div>
+                </div>
+                <p class="text-[11px] text-slate-500 font-mono mt-4">💡 Click inside the box above to easily select and copy the text.</p>
+            </div>
+
+            <!-- Template 2: Feature Deep-Dive (Images & Costs) -->
+            <div class="p-8 rounded-2xl glass-panel border border-white/5 flex flex-col justify-between">
+                <div>
+                    <span class="text-xs font-mono font-bold text-cosmic-teal uppercase tracking-wider block mb-2">🖼️ Secure Media & Costs focus</span>
+                    <h4 class="text-lg font-bold text-white mb-4">Highlight Image Sharing & Micro-Fees</h4>
+                    <div class="p-4 bg-cosmic-950/80 rounded-xl border border-white/5 font-sans text-xs text-slate-300 leading-relaxed select-all">
+How does sharing images work on a pure, server-less messenger? 
+
+Allo•Alu integrates IPFS support via @PinataCloud so you stay in total control of your media with zero middlemen. 
+
+💰 Cost breakdown:
+• 100% Free Open-Source App (No ads/subs)
+• Chat message gas fee: exactly 0.001 ALGO (~$0.0001)
+• 10,000 encrypted messages for just $1!
+
+Secure, permanent, fast (2.8s finality), and environmentally clean. Your keys, your chat.
+
+Try it now: https://github.com/devitamine/Allo-Alu/releases
+
+#Algorand $ALGO #IPFS #Decentralized #Android
+                    </div>
+                </div>
+                <p class="text-[11px] text-slate-500 font-mono mt-4">💡 Click inside the box above to easily select and copy the text.</p>
+            </div>
+
+            <!-- Template 3: Reply Template -->
+            <div class="md:col-span-2 p-8 rounded-2xl bg-gradient-to-br from-cosmic-glow/10 to-transparent border border-cosmic-glow/20 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div class="flex-1">
+                    <span class="text-xs font-mono font-bold text-cosmic-glow uppercase tracking-wider block mb-2">💬 Thread Reply / Comment</span>
+                    <h4 class="text-lg font-bold text-white mb-2">Perfect Reply to Web3 & Privacy Discussions</h4>
+                    <p class="text-slate-400 text-sm mb-4">Use this template when replying to discussions about messaging privacy, server crashes, or Algorand utility:</p>
+                    <div class="p-4 bg-cosmic-950/80 rounded-xl border border-white/5 font-sans text-xs text-slate-300 leading-relaxed select-all">
+If you value true sovereignty, check out Allo•Alu! It's a pure, server-less Android messenger that runs completely on @Algorand. Every message is an encrypted transaction payload (0.001 ALGO gas), and images are sent privately over IPFS with Pinata. Zero central databases to hack or censor. https://github.com/devitamine/Allo-Alu/releases
+                    </div>
                 </div>
             </div>
         </div>
