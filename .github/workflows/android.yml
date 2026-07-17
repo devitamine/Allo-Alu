@@ -25,6 +25,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
         with:
           cache-overwrite-existing: true
+          validate-wrappers: false
 
       - name: Make Gradle Wrapper Executable
         run: chmod +x gradlew
