@@ -1,0 +1,6 @@
+{
+  "name": "Allo•Alu",
+  "description": "An end-to-end encrypted messaging client built on the Algorand blockchain.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

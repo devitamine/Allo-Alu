@@ -1,0 +1,13 @@
+# Ensure gradlew has LF line endings on all platforms
+gradlew text eol=lf
+gradlew.bat text eol=crlf
+
+# Ensure binary files are not treated as text
+*.jar binary
+*.png binary
+*.gif binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.ico binary
+*.keystore binary
