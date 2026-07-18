@@ -137,7 +137,7 @@
         <div class="absolute top-1/4 left-1/4 w-80 h-80 bg-cosmic-accent/15 blur-[140px] rounded-full pointer-events-none"></div>
         <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cosmic-glow/10 blur-[160px] rounded-full pointer-events-none"></div>
 
-        <div class="lg:col-span-7 flex flex-col space-y-8 z-10 bg-gradient-to-b from-cosmic-800/95 to-cosmic-900/98 border border-white/20 p-8 md:p-12 rounded-[36px] shadow-[0_25px_60px_rgba(0,0,0,0.65),0_0_40px_rgba(59,130,246,0.05)] hover:border-cosmic-accent/40 transition-all duration-500 backdrop-blur-lg">
+        <div class="lg:col-span-6 flex flex-col space-y-8 z-10 bg-gradient-to-b from-cosmic-800/95 to-cosmic-900/98 border border-white/20 p-8 md:p-12 rounded-[36px] shadow-[0_25px_60px_rgba(0,0,0,0.65),0_0_40px_rgba(59,130,246,0.05)] hover:border-cosmic-accent/40 transition-all duration-500 backdrop-blur-lg">
             <div class="inline-flex items-center space-x-2 px-3 py-1.5 bg-gradient-to-r from-cosmic-accent/15 to-cosmic-glow/15 border border-cosmic-accent/30 rounded-full text-xs font-mono text-white tracking-wide uppercase max-w-max">
                 <span class="flex h-2 w-2 rounded-full bg-cosmic-teal animate-pulse mr-1"></span>
                 <span>Fully Free Application &middot; Pure Blockchain P2P</span>
@@ -180,12 +180,12 @@
         </div>
 
         <!-- Phone UI Preview Wrapper -->
-        <div class="lg:col-span-5 flex justify-center relative z-10">
+        <div class="lg:col-span-6 flex justify-center relative z-10">
             <!-- Glowing orbit behind mock -->
             <div class="absolute inset-0 bg-gradient-to-tr from-cosmic-accent/20 to-cosmic-glow/20 rounded-full blur-[80px] -z-10 scale-95 opacity-75"></div>
             
             <div class="relative max-w-full flex justify-center items-center">
-                <img src="assets/screenshot_v1.jpg" alt="AlloChat App Screenshot" class="w-80 md:w-96 rounded-[48px] border-[10px] border-cosmic-700 shadow-[0_30px_70px_rgba(0,0,0,0.8),0_0_50px_rgba(168,85,247,0.15)] relative z-10 hover:scale-[1.03] transition-all duration-500">
+                <img src="assets/screenshot_v1.jpg" alt="AlloChat App Screenshot" class="w-[320px] sm:w-[420px] md:w-[480px] lg:w-[440px] xl:w-[480px] rounded-[48px] border-[12px] border-cosmic-700 shadow-[0_35px_80px_rgba(0,0,0,0.9),0_0_60px_rgba(168,85,247,0.2)] relative z-10 hover:scale-[1.04] transition-all duration-500">
             </div>
         </div>
     </section>
@@ -269,6 +269,107 @@
                 <span class="text-xs font-mono font-bold text-cosmic-glow flex items-center space-x-1 mt-4">
                     <span>Direct-to-Blockchain Only</span>
                 </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Highlighted Key Features Section -->
+    <section id="key-features" class="py-24 bg-gradient-to-br from-[#0c0d1b] via-[#11132a] to-[#070812] border-y border-cosmic-glow/30 relative overflow-hidden">
+        <!-- Ambient Glowing Orbs -->
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-cosmic-glow/20 blur-[150px] rounded-full pointer-events-none animate-aura-1"></div>
+        <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-cosmic-accent/20 blur-[150px] rounded-full pointer-events-none animate-aura-2"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="inline-flex items-center space-x-2 px-3 py-1 bg-cosmic-glow/20 border border-cosmic-glow/40 rounded-full text-xs font-mono text-cosmic-glow uppercase tracking-wider mb-3">
+                    🚀 Key Capabilities
+                </span>
+                <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white font-mono mt-2">
+                    Key Features &amp; Smart Operations
+                </h2>
+                <p class="text-slate-300 mt-4 text-base md:text-lg">
+                    Discover the cutting-edge features that set Allo•Alu apart as a modern, secure, and user-centric peer-to-peer messaging solution.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1: Pinata Cloud -->
+                <div class="p-8 rounded-2xl bg-cosmic-950/60 border border-white/10 hover:border-cosmic-glow/50 transition-all duration-300 flex flex-col hover:-translate-y-1 shadow-lg hover:shadow-[0_20px_40px_rgba(168,85,247,0.15)] group">
+                    <div class="w-12 h-12 rounded-xl bg-cosmic-glow/10 border border-cosmic-glow/30 flex items-center justify-center text-cosmic-glow mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Pinata Cloud Media Integration</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Seamlessly upload, store, and display high-quality images and media using Pinata (IPFS). Benefit from decentralized storage without sacrificing speed or performance.
+                    </p>
+                </div>
+
+                <!-- Feature 2: Separated Contacts Hub -->
+                <div class="p-8 rounded-2xl bg-cosmic-950/60 border border-white/10 hover:border-cosmic-accent/50 transition-all duration-300 flex flex-col hover:-translate-y-1 shadow-lg hover:shadow-[0_20px_40px_rgba(59,130,246,0.15)] group">
+                    <div class="w-12 h-12 rounded-xl bg-cosmic-accent/10 border border-cosmic-accent/30 flex items-center justify-center text-cosmic-accent mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">"Others" &amp; Separated Contacts Hub</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        A smart contact management system where standard contacts and unrecognized/external contacts are kept in separate, dedicated tabs ("Inbox/Contacts" vs. "Others") to reduce clutter.
+                    </p>
+                </div>
+
+                <!-- Feature 3: Biometric Authentication -->
+                <div class="p-8 rounded-2xl bg-cosmic-950/60 border border-white/10 hover:border-cosmic-teal/50 transition-all duration-300 flex flex-col hover:-translate-y-1 shadow-lg hover:shadow-[0_20px_40px_rgba(16,185,129,0.15)] group">
+                    <div class="w-12 h-12 rounded-xl bg-cosmic-teal/10 border border-cosmic-teal/30 flex items-center justify-center text-cosmic-teal mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 009 11.571V11a4 4 0 118 0v.571c0 .545.064 1.085.19 1.611l.124.512m-9.48 2.037a13.916 13.916 0 01-1.397-5.591c0-2.52.398-5.02 1.171-7.411m9.08 7.411c.427-.51.9-1.002 1.41-1.472M12 17.5c-2.33 0-4.518-.397-6.55-1.11m13.1-2.643a9.045 9.045 0 011.855-2.408M12 17.5a13.982 13.982 0 001.397-5.591M12 17.5c.343 0 .68-.018 1.012-.053m0 0a13.917 13.917 0 005.151-2.223m-5.151 2.223a14.02 14.02 0 002.3-5.591M3 7.25c1.352-1.127 2.87-2.008 4.5-2.62M17 4.63a12.93 12.93 0 014.5 2.62" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Biometric Authentication</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Quick and secure login capabilities using fingerprint or facial recognition (Touch ID / Face ID) to easily shield your messages from offline intruders.
+                    </p>
+                </div>
+
+                <!-- Feature 4: Security Throttling -->
+                <div class="p-8 rounded-2xl bg-cosmic-950/60 border border-white/10 hover:border-cosmic-coral/50 transition-all duration-300 flex flex-col hover:-translate-y-1 shadow-lg hover:shadow-[0_20px_40px_rgba(244,63,94,0.15)] group">
+                    <div class="w-12 h-12 rounded-xl bg-cosmic-coral/10 border border-cosmic-coral/30 flex items-center justify-center text-cosmic-coral mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Security Throttling</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Robust brute-force defense that automatically locks login attempts for exactly 1 minute after 3 consecutive failed password entries, safeguarding your private seed phrase.
+                    </p>
+                </div>
+
+                <!-- Feature 5: Smart Search -->
+                <div class="p-8 rounded-2xl bg-cosmic-950/60 border border-white/10 hover:border-cosmic-glow/50 transition-all duration-300 flex flex-col hover:-translate-y-1 shadow-lg hover:shadow-[0_20px_40px_rgba(168,85,247,0.15)] group">
+                    <div class="w-12 h-12 rounded-xl bg-cosmic-glow/10 border border-cosmic-glow/30 flex items-center justify-center text-cosmic-glow mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Smart Search &amp; Categorization</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        An intelligent, localized search engine that filters through your contacts, public chats, and note archives instantly as you type with zero delay.
+                    </p>
+                </div>
+
+                <!-- Feature 6: Offline Mode Support -->
+                <div class="p-8 rounded-2xl bg-cosmic-950/60 border border-white/10 hover:border-cosmic-accent/50 transition-all duration-300 flex flex-col hover:-translate-y-1 shadow-lg hover:shadow-[0_20px_40px_rgba(59,130,246,0.15)] group">
+                    <div class="w-12 h-12 rounded-xl bg-cosmic-accent/10 border border-cosmic-accent/30 flex items-center justify-center text-cosmic-accent mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Offline Mode Support</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        State-of-the-art caching mechanism that stores messages, contacts, and note data locally, allowing uninterrupted read access and drafting even with no active internet.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
@@ -542,84 +643,7 @@
         </div>
     </section>
 
-    <!-- Community Promotion & X/Twitter Kit -->
-    <section id="promo-kit" class="py-24 px-6 md:px-12 max-w-7xl mx-auto relative border-t border-white/5">
-        <div class="absolute -top-10 left-1/4 w-80 h-80 bg-cosmic-glow/10 blur-[130px] rounded-full pointer-events-none"></div>
-        
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <span class="text-xs font-mono font-bold text-cosmic-accent uppercase tracking-widest">Share the Revolution</span>
-            <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white font-mono mt-2">
-                X/Twitter & Community Kit
-            </h2>
-            <p class="text-slate-400 mt-4 text-base md:text-lg">
-                Help us spread the word! Below are ready-to-use post templates tailored for X (Twitter) and the Algorand community to introduce Allo•Alu.
-            </p>
-        </div>
 
-        <div class="grid md:grid-cols-2 gap-8">
-            <!-- Template 1: Main Announcement -->
-            <div class="p-8 rounded-2xl glass-panel border border-white/5 flex flex-col justify-between">
-                <div>
-                    <span class="text-xs font-mono font-bold text-cosmic-accent uppercase tracking-wider block mb-2">📢 Main App Launch Post</span>
-                    <h4 class="text-lg font-bold text-white mb-4">Introduce Allo•Alu to Web3</h4>
-                    <div class="p-4 bg-cosmic-950/80 rounded-xl border border-white/5 font-sans text-xs text-slate-300 leading-relaxed select-all">
-🚀 Introducing Allo•Alu — a 100% server-less, open-source Android messenger built on @Algorand! 
-
-No ads, no monthly fees, and total cryptographic sovereignty. 
-
-Key features:
-🔒 E2E Encrypted Chat via Algorand payloads
-🖼️ Decentralized secure image sharing (via @PinataCloud IPFS)
-📝 Private On-Chain Notepad (encrypted with your own keys)
-
-Gas is just 0.001 ALGO per message (~$0.0001)! 
-
-Download the APK here: https://github.com/devitamine/Allo-Alu/releases
-
-#Algorand $ALGO #Web3 #IPFS #OpenSource
-                    </div>
-                </div>
-                <p class="text-[11px] text-slate-500 font-mono mt-4">💡 Click inside the box above to easily select and copy the text.</p>
-            </div>
-
-            <!-- Template 2: Feature Deep-Dive (Images & Costs) -->
-            <div class="p-8 rounded-2xl glass-panel border border-white/5 flex flex-col justify-between">
-                <div>
-                    <span class="text-xs font-mono font-bold text-cosmic-teal uppercase tracking-wider block mb-2">🖼️ Secure Media & Costs focus</span>
-                    <h4 class="text-lg font-bold text-white mb-4">Highlight Image Sharing & Micro-Fees</h4>
-                    <div class="p-4 bg-cosmic-950/80 rounded-xl border border-white/5 font-sans text-xs text-slate-300 leading-relaxed select-all">
-How does sharing images work on a pure, server-less messenger? 
-
-Allo•Alu integrates IPFS support via @PinataCloud so you stay in total control of your media with zero middlemen. 
-
-💰 Cost breakdown:
-• 100% Free Open-Source App (No ads/subs)
-• Chat message gas fee: exactly 0.001 ALGO (~$0.0001)
-• 10,000 encrypted messages for just $1!
-
-Secure, permanent, fast (2.8s finality), and environmentally clean. Your keys, your chat.
-
-Try it now: https://github.com/devitamine/Allo-Alu/releases
-
-#Algorand $ALGO #IPFS #Decentralized #Android
-                    </div>
-                </div>
-                <p class="text-[11px] text-slate-500 font-mono mt-4">💡 Click inside the box above to easily select and copy the text.</p>
-            </div>
-
-            <!-- Template 3: Reply Template -->
-            <div class="md:col-span-2 p-8 rounded-2xl bg-gradient-to-br from-cosmic-glow/10 to-transparent border border-cosmic-glow/20 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-                <div class="flex-1">
-                    <span class="text-xs font-mono font-bold text-cosmic-glow uppercase tracking-wider block mb-2">💬 Thread Reply / Comment</span>
-                    <h4 class="text-lg font-bold text-white mb-2">Perfect Reply to Web3 & Privacy Discussions</h4>
-                    <p class="text-slate-400 text-sm mb-4">Use this template when replying to discussions about messaging privacy, server crashes, or Algorand utility:</p>
-                    <div class="p-4 bg-cosmic-950/80 rounded-xl border border-white/5 font-sans text-xs text-slate-300 leading-relaxed select-all">
-If you value true sovereignty, check out Allo•Alu! It's a pure, server-less Android messenger that runs completely on @Algorand. Every message is an encrypted transaction payload (0.001 ALGO gas), and images are sent privately over IPFS with Pinata. Zero central databases to hack or censor. https://github.com/devitamine/Allo-Alu/releases
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Footer -->
     <footer class="border-t border-white/5 py-12 px-6 md:px-12 bg-cosmic-950">
