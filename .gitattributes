@@ -1,13 +1,16 @@
+# Set default behavior to automatically handle line endings for text files
+* text=auto
+
 # Ensure gradlew has LF line endings on all platforms
 gradlew text eol=lf
 gradlew.bat text eol=crlf
 
-# Ensure binary files are not treated as text
-*.jar binary
-*.png binary
-*.gif binary
-*.jpg binary
-*.jpeg binary
-*.webp binary
-*.ico binary
-*.keystore binary
+# Force binary files to be treated as binary - strictly disabling any text/line-ending conversions
+*.png -text -diff
+*.jpg -text -diff
+*.jpeg -text -diff
+*.gif -text -diff
+*.webp -text -diff
+*.ico -text -diff
+*.jar -text -diff
+*.keystore -text -diff
