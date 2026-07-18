@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Allo•Alu — 100% Open-Source E2E Private Web3 Messenger</title>
+    <title>Allo•Alu — Pure Sovereign E2E Web3 Messenger</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script>
@@ -16,10 +16,10 @@
                     },
                     colors: {
                         cosmic: {
-                            950: '#07080A',
-                            900: '#0B0C0E',
-                            800: '#121418',
-                            700: '#1A1D24',
+                            950: '#030407',
+                            900: '#07080F',
+                            800: '#0F1122',
+                            700: '#171A35',
                             accent: '#3B82F6', // Trust blue
                             glow: '#A855F7',   // Web3 purple
                             teal: '#10B981',   // Secure green
@@ -32,7 +32,7 @@
     </script>
     <style>
         body {
-            background-color: #030406;
+            background-color: #030407;
             color: #E2E8F0;
         }
         .glow-button {
@@ -53,612 +53,478 @@
         .glow-button:hover::after {
             opacity: 0.75;
         }
-        /* FROSTED GLASS PANELS (Aura Ambient) */
-        .glass-panel {
-            background: rgba(11, 12, 16, 0.4);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.04);
+        /* Frosted Glass Cards */
+        .glass-card {
+            background: rgba(15, 17, 34, 0.45);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .glass-panel:hover {
-            background: rgba(11, 12, 16, 0.65);
-            border: 1px solid rgba(255, 255, 255, 0.09);
+        .glass-card:hover {
+            background: rgba(15, 17, 34, 0.7);
+            border-color: rgba(168, 85, 247, 0.3);
         }
-        /* AMBIENT SHADOWS */
-        .hover-glow-blue:hover {
-            box-shadow: 0 0 40px -10px rgba(59, 130, 246, 0.25);
-            border-color: rgba(59, 130, 246, 0.25);
-        }
-        .hover-glow-purple:hover {
-            box-shadow: 0 0 40px -10px rgba(139, 92, 246, 0.25);
-            border-color: rgba(139, 92, 246, 0.25);
-        }
-        .hover-glow-teal:hover {
-            box-shadow: 0 0 40px -10px rgba(16, 185, 129, 0.25);
-            border-color: rgba(16, 185, 129, 0.25);
-        }
-        .hover-glow-pink:hover {
-            box-shadow: 0 0 40px -10px rgba(244, 63, 94, 0.25);
-            border-color: rgba(244, 63, 94, 0.25);
-        }
-        /* BREATHING AMBIENT AURAS */
+        /* Fast animation pulses */
         @keyframes pulse-slow {
-            0%, 100% { transform: scale(1) translate(0px, 0px); opacity: 0.8; }
-            33% { transform: scale(1.1) translate(30px, -50px); opacity: 0.95; }
-            66% { transform: scale(0.9) translate(-20px, 20px); opacity: 0.7; }
+            0%, 100% { transform: scale(1) translate(0px, 0px); opacity: 0.6; }
+            50% { transform: scale(1.15) translate(20px, -40px); opacity: 0.85; }
         }
         .animate-aura-1 {
-            animation: pulse-slow 18s infinite ease-in-out;
+            animation: pulse-slow 15s infinite ease-in-out;
         }
         .animate-aura-2 {
-            animation: pulse-slow 24s infinite ease-in-out reverse;
-        }
-        .animate-aura-3 {
-            animation: pulse-slow 15s infinite ease-in-out 3s;
+            animation: pulse-slow 20s infinite ease-in-out reverse;
         }
     </style>
 </head>
-<body class="font-sans antialiased overflow-x-hidden">
+<body class="font-sans antialiased overflow-x-hidden text-slate-200">
 
     <!-- Header Navigation -->
-    <header class="border-b-2 border-cosmic-accent/50 py-4 px-6 md:px-12 sticky top-0 bg-cosmic-900/98 backdrop-blur-xl z-50 shadow-[0_15px_35px_rgba(3,4,6,0.9),0_2px_20px_rgba(59,130,246,0.15)] transition-all duration-300">
+    <header class="border-b border-white/10 py-4 px-6 md:px-12 sticky top-0 bg-cosmic-950/90 backdrop-blur-xl z-50 shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <div class="flex items-center space-x-3 bg-cosmic-800/90 border border-white/15 hover:border-cosmic-accent/40 px-4 py-2 rounded-2xl shadow-lg transition-all duration-300">
-                <img src="assets/logo_v1.png" alt="Allo•Alu Logo" class="w-10 h-10 rounded-xl object-contain bg-cosmic-950 border border-white/15 shadow-md">
+            <div class="flex items-center space-x-3 bg-cosmic-800/80 border border-white/10 px-4 py-2 rounded-2xl shadow-lg">
+                <img src="assets/logo_v1.png" alt="Allo•Alu Logo" class="w-10 h-10 rounded-xl object-contain bg-cosmic-950 border border-white/15">
                 <div>
                     <div class="flex items-center space-x-1.5">
                         <span class="text-xl font-bold tracking-tight text-white font-mono">Allo•Alu</span>
                         <span class="text-[9px] bg-cosmic-accent/20 text-cosmic-accent px-1.5 py-0.5 rounded font-mono font-bold">V1.1.0</span>
                     </div>
-                    <span class="text-[10px] block font-mono text-cosmic-teal -mt-0.5 font-bold">● ONLINE</span>
+                    <span class="text-[9px] block font-mono text-cosmic-teal font-bold uppercase tracking-widest">● Sovereign P2P</span>
                 </div>
             </div>
             
-            <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
-                <a href="#features" class="text-slate-300 hover:text-white transition-colors">Features</a>
-                <a href="#web3-benefits" class="text-slate-300 hover:text-white transition-colors">Multimedia & Notepad</a>
-                <a href="#fee-structure" class="text-slate-300 hover:text-white transition-colors">Micro-Fees</a>
-                <a href="#algorand-advantages" class="text-slate-300 hover:text-white transition-colors">Algorand Advantage</a>
-                <a href="#specs" class="text-slate-300 hover:text-white transition-colors">Specs</a>
+            <div class="hidden md:flex items-center space-x-8 text-sm font-medium font-mono">
+                <a href="#security" class="text-slate-300 hover:text-cosmic-teal transition-colors">🔒 Ultimate Security</a>
+                <a href="#features" class="text-slate-300 hover:text-cosmic-glow transition-colors">⚡ Full Specs</a>
+                <a href="#pinata" class="text-slate-300 hover:text-cosmic-accent transition-colors">🖼️ IPFS Media</a>
+                <a href="#economics" class="text-slate-300 hover:text-white transition-colors">💰 Costs</a>
             </div>
 
             <div>
-                <a href="https://github.com/devitamine/Allo-Alu" target="_blank" class="px-5 py-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-sm font-bold tracking-tight text-white transition-all flex items-center space-x-2">
+                <a href="https://github.com/devitamine/Allo-Alu" target="_blank" class="px-5 py-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-xs font-mono font-bold text-white transition-all flex items-center space-x-2">
                     <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                    <span>View Source</span>
+                    <span>SOURCE CODE</span>
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="relative py-20 px-6 md:px-12 max-w-7xl mx-auto grid lg:grid-cols-12 gap-16 items-center">
-        <!-- Gorgeous Glowing Background Accents -->
-        <div class="absolute top-1/4 left-1/4 w-80 h-80 bg-cosmic-accent/15 blur-[140px] rounded-full pointer-events-none"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cosmic-glow/10 blur-[160px] rounded-full pointer-events-none"></div>
+    <!-- Hero / Ultimate Showcase Section (Increased Mockup Size) -->
+    <section class="relative py-24 px-6 md:px-12 max-w-7xl mx-auto grid lg:grid-cols-12 gap-16 items-center">
+        <!-- Background Orbs -->
+        <div class="absolute top-12 left-1/4 w-[500px] h-[500px] bg-cosmic-glow/15 blur-[150px] rounded-full pointer-events-none animate-aura-1"></div>
+        <div class="absolute bottom-12 right-1/4 w-[500px] h-[500px] bg-cosmic-accent/10 blur-[180px] rounded-full pointer-events-none animate-aura-2"></div>
 
-        <div class="lg:col-span-6 flex flex-col space-y-8 z-10 bg-gradient-to-b from-cosmic-800/95 to-cosmic-900/98 border border-white/20 p-8 md:p-12 rounded-[36px] shadow-[0_25px_60px_rgba(0,0,0,0.65),0_0_40px_rgba(59,130,246,0.05)] hover:border-cosmic-accent/40 transition-all duration-500 backdrop-blur-lg">
-            <div class="inline-flex items-center space-x-2 px-3 py-1.5 bg-gradient-to-r from-cosmic-accent/15 to-cosmic-glow/15 border border-cosmic-accent/30 rounded-full text-xs font-mono text-white tracking-wide uppercase max-w-max">
-                <span class="flex h-2 w-2 rounded-full bg-cosmic-teal animate-pulse mr-1"></span>
-                <span>Fully Free Application &middot; Pure Blockchain P2P</span>
+        <!-- Text Column -->
+        <div class="lg:col-span-6 flex flex-col space-y-8 z-10 bg-gradient-to-b from-cosmic-800 to-cosmic-900 border border-white/10 p-8 md:p-12 rounded-[36px] shadow-[0_25px_60px_rgba(0,0,0,0.8)] backdrop-blur-lg">
+            <div class="inline-flex items-center space-x-2 px-3 py-1 bg-cosmic-teal/10 border border-cosmic-teal/30 rounded-full text-xs font-mono text-cosmic-teal font-bold uppercase tracking-wider max-w-max">
+                <span class="flex h-2 w-2 rounded-full bg-cosmic-teal animate-ping mr-1"></span>
+                <span>Pure Serverless P2P Messenger</span>
             </div>
             
-            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white leading-[1.1] font-sans">
-                Pure Sovereign Chat. <br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-cosmic-accent via-cosmic-glow to-cosmic-teal">Zero Subscription. Micro-Fees.</span>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white leading-[1.1]">
+                Your Keys.<br>
+                Your Messages.<br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-cosmic-accent via-cosmic-glow to-cosmic-teal">100% Cryptographic.</span>
             </h1>
             
-            <p class="text-lg md:text-xl text-slate-300 max-w-xl leading-relaxed">
-                A 100% free and open-source Android messenger. Chat securely with cryptographic keys. No ads, no premium subscriptions—only standard microscopic network fees on the hyper-efficient Algorand blockchain.
+            <p class="text-lg text-slate-300 font-mono leading-relaxed">
+                Ad-free. Subscription-free. Central server-free. Allo•Alu delivers secure, peer-to-peer communication directly on-chain using micro-transactions on the eco-friendly Algorand ledger.
             </p>
 
-            <div class="flex flex-col sm:flex-row gap-4 pt-4">
-                <a href="https://github.com/devitamine/Allo-Alu/releases" target="_blank" class="glow-button px-8 py-4 bg-gradient-to-r from-cosmic-accent to-cosmic-glow text-white hover:opacity-95 transition-all font-bold tracking-tight rounded-xl flex items-center justify-center space-x-3 text-base shadow-lg shadow-cosmic-glow/10">
+            <div class="flex flex-col sm:flex-row gap-4 pt-2">
+                <a href="https://github.com/devitamine/Allo-Alu/releases" target="_blank" class="glow-button px-8 py-4 bg-gradient-to-r from-cosmic-accent to-cosmic-glow text-white hover:opacity-95 transition-all font-mono font-bold tracking-tight rounded-xl flex items-center justify-center space-x-3 text-base shadow-lg shadow-cosmic-glow/20">
                     <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 11v4h-2v-4H8l4-4 4 4h-3z"/></svg>
-                    <span>Download V1.1.0 APK</span>
+                    <span>GET LATEST APK</span>
                 </a>
-                <a href="#fee-structure" class="px-8 py-4 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 text-white transition-all font-bold tracking-tight rounded-xl flex items-center justify-center space-x-2 text-base">
-                    <span>How Much Does It Cost?</span>
+                <a href="#economics" class="px-8 py-4 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 text-white transition-all font-mono text-sm font-bold rounded-xl flex items-center justify-center space-x-2">
+                    <span>ECONOMIC MATRIX</span>
                 </a>
             </div>
 
-            <!-- Mini Trust Stats -->
-            <div class="grid grid-cols-3 gap-6 pt-8 border-t border-white/10 max-w-lg">
+            <!-- Punchy Assets / Strengths Grid -->
+            <div class="grid grid-cols-3 gap-4 pt-8 border-t border-white/10 text-center sm:text-left">
                 <div>
-                    <span class="block text-2xl font-bold text-white font-mono">0.001 ALGO</span>
-                    <span class="text-xs text-slate-400">Fee Per Message</span>
+                    <span class="block text-xl font-bold text-white font-mono">0.001 ALGO</span>
+                    <span class="text-[11px] text-slate-400 font-mono uppercase tracking-wider">Direct Network Gas</span>
                 </div>
                 <div>
-                    <span class="block text-2xl font-bold text-cosmic-teal font-mono">0.101 ALGO</span>
-                    <span class="text-xs text-slate-400">Minimum Wallet Balance</span>
+                    <span class="block text-xl font-bold text-cosmic-teal font-mono">Instant</span>
+                    <span class="text-[11px] text-slate-400 font-mono uppercase tracking-wider">Forkless Finality</span>
                 </div>
                 <div>
-                    <span class="block text-2xl font-bold text-white font-mono">&lt; 2.8s</span>
-                    <span class="text-xs text-slate-400">Message Delivery</span>
+                    <span class="block text-xl font-bold text-cosmic-glow font-mono">No Servers</span>
+                    <span class="text-[11px] text-slate-400 font-mono uppercase tracking-wider">Censorship Proof</span>
                 </div>
             </div>
         </div>
 
-        <!-- Phone UI Preview Wrapper -->
+        <!-- Enlarged Website Mockup & App Screenshot Display -->
         <div class="lg:col-span-6 flex justify-center relative z-10">
-            <!-- Glowing orbit behind mock -->
-            <div class="absolute inset-0 bg-gradient-to-tr from-cosmic-accent/20 to-cosmic-glow/20 rounded-full blur-[80px] -z-10 scale-95 opacity-75"></div>
+            <!-- Neon backdrop shadow glows -->
+            <div class="absolute inset-0 bg-gradient-to-tr from-cosmic-accent/25 via-cosmic-glow/25 to-cosmic-teal/25 rounded-full blur-[100px] -z-10 scale-100 opacity-80"></div>
             
+            <!-- Sleek Device Shell Frame with larger dimensions -->
             <div class="relative max-w-full flex justify-center items-center">
-                <img src="assets/screenshot_v1.jpg" alt="AlloChat App Screenshot" class="w-[320px] sm:w-[420px] md:w-[480px] lg:w-[440px] xl:w-[480px] rounded-[48px] border-[12px] border-cosmic-700 shadow-[0_35px_80px_rgba(0,0,0,0.9),0_0_60px_rgba(168,85,247,0.2)] relative z-10 hover:scale-[1.04] transition-all duration-500">
+                <img src="assets/screenshot_v1.jpg" alt="Allo•Alu App UI Mockup" class="w-[360px] sm:w-[460px] md:w-[520px] lg:w-[480px] xl:w-[560px] rounded-[52px] border-[14px] border-cosmic-700 shadow-[0_45px_100px_rgba(0,0,0,0.95),0_0_80px_rgba(168,85,247,0.3)] relative z-10 hover:scale-[1.03] transition-all duration-500">
+                
+                <!-- Pure Web3 Proof Floating Badges -->
+                <div class="absolute -top-6 -right-6 bg-cosmic-teal text-white text-[10px] font-mono font-bold px-3 py-1.5 rounded-full shadow-lg z-20 border border-white/20 transform rotate-6">
+                    ⚡ 2.8s FINALITY
+                </div>
+                <div class="absolute -bottom-6 -left-6 bg-cosmic-glow text-white text-[10px] font-mono font-bold px-3 py-1.5 rounded-full shadow-lg z-20 border border-white/20 transform -rotate-3">
+                    🔒 NO CENTRAL DB
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Trust / Proof Banner -->
-    <section class="border-y border-white/5 bg-cosmic-950 py-10 px-6 overflow-hidden">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-            <div class="flex items-center space-x-4">
-                <div class="w-12 h-12 rounded-xl bg-cosmic-accent/10 border border-cosmic-accent/20 flex items-center justify-center text-cosmic-accent">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-                </div>
-                <div>
-                    <h3 class="text-lg font-bold text-white tracking-tight">100% Verifiable & Safe on GitHub</h3>
-                    <p class="text-sm text-slate-400">Every single line of client code is publicly available for auditing. No hidden telemetry.</p>
-                </div>
-            </div>
-            <div class="flex items-center space-x-3 bg-cosmic-800/80 border border-white/10 px-4 py-2 rounded-xl font-mono text-xs text-slate-300">
-                <span>Commit Verified</span>
-                <span class="w-2 h-2 rounded-full bg-cosmic-teal"></span>
-                <a href="https://github.com/devitamine/Allo-Alu" target="_blank" class="text-cosmic-accent hover:underline font-bold">V1.1.0 Release</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Key Pillars Section -->
-    <section id="features" class="py-24 px-6 md:px-12 max-w-7xl mx-auto">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white font-mono">
-                Decentralized & Pure Communication
-            </h2>
-            <p class="text-slate-400 mt-4 text-base md:text-lg">
-                We designed Allo•Alu for the privacy-conscious Web3 enthusiast, replacing the vulnerable paradigms of Web2 with cryptographically proven safety.
-            </p>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-8">
-            <!-- Pillar 1 -->
-            <div class="p-8 rounded-2xl glass-panel hover:border-cosmic-accent/30 transition-all flex flex-col justify-between">
-                <div>
-                    <div class="w-12 h-12 rounded-xl bg-cosmic-accent/10 border border-cosmic-accent/20 flex items-center justify-center text-cosmic-accent mb-6">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">100% Open-Source</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
-                        We believe true security is auditable. Every feature, cryptographic schema, and package in Allo•Alu is open-source. Anyone can inspect, build, and audit the repository on GitHub anytime.
-                    </p>
-                </div>
-                <a href="https://github.com/devitamine/Allo-Alu" target="_blank" class="text-xs font-mono font-bold text-cosmic-accent hover:text-cosmic-glow flex items-center space-x-1 mt-4">
-                    <span>Examine source files</span>
-                    <span>&rarr;</span>
-                </a>
-            </div>
-
-            <!-- Pillar 2 -->
-            <div class="p-8 rounded-2xl glass-panel hover:border-cosmic-teal/30 transition-all flex flex-col justify-between">
-                <div>
-                    <div class="w-12 h-12 rounded-xl bg-cosmic-teal/10 border border-cosmic-teal/20 flex items-center justify-center text-cosmic-teal mb-6">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">99.9% Security Hardened</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
-                        Utilizes custom localized SQLite Room encryption combined with hardware-backed Android Keystore keys. All data stored on-device remains shielded behind modern cryptographic locks, preventing physical extraction.
-                    </p>
-                </div>
-                <span class="text-xs font-mono font-bold text-cosmic-teal flex items-center space-x-1 mt-4">
-                    <span>99.9% Audited Protection</span>
-                </span>
-            </div>
-
-            <!-- Pillar 3 -->
-            <div class="p-8 rounded-2xl glass-panel hover:border-cosmic-glow/30 transition-all flex flex-col justify-between">
-                <div>
-                    <div class="w-12 h-12 rounded-xl bg-cosmic-glow/10 border border-cosmic-glow/20 flex items-center justify-center text-cosmic-glow mb-6">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">No Flaky Servers or Ads</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
-                        We avoid annoying third-party ads and unreliable middleman servers that work one day and crash the next. Allo•Alu interacts directly with the decentralized Algorand ledger, achieving maximum stability.
-                    </p>
-                </div>
-                <span class="text-xs font-mono font-bold text-cosmic-glow flex items-center space-x-1 mt-4">
-                    <span>Direct-to-Blockchain Only</span>
-                </span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Highlighted Key Features Section -->
-    <section id="key-features" class="py-24 bg-gradient-to-br from-[#0c0d1b] via-[#11132a] to-[#070812] border-y border-cosmic-glow/30 relative overflow-hidden">
-        <!-- Ambient Glowing Orbs -->
-        <div class="absolute -top-40 -left-40 w-96 h-96 bg-cosmic-glow/20 blur-[150px] rounded-full pointer-events-none animate-aura-1"></div>
-        <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-cosmic-accent/20 blur-[150px] rounded-full pointer-events-none animate-aura-2"></div>
+    <!-- SECTION 1: ULTIMATE ARMORED SECURITY (HIGH-CONTRAST HIGHLIGHTED BLOCK) -->
+    <section id="security" class="py-24 bg-gradient-to-r from-[#02231c]/90 via-[#031526]/95 to-[#1a082b]/90 border-y-2 border-cosmic-teal/60 relative overflow-hidden">
+        <div class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-cosmic-teal to-transparent"></div>
+        <div class="absolute -top-32 left-1/3 w-96 h-96 bg-cosmic-teal/20 blur-[130px] rounded-full pointer-events-none"></div>
         
         <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="inline-flex items-center space-x-2 px-3 py-1 bg-cosmic-glow/20 border border-cosmic-glow/40 rounded-full text-xs font-mono text-cosmic-glow uppercase tracking-wider mb-3">
-                    🚀 Key Capabilities
+                <span class="inline-flex items-center space-x-2 px-3 py-1 bg-cosmic-coral/20 border border-cosmic-coral/40 rounded-full text-xs font-mono text-cosmic-coral uppercase tracking-widest mb-3">
+                    🛡️ Extreme Hardening
                 </span>
-                <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white font-mono mt-2">
-                    Key Features &amp; Smart Operations
+                <h2 class="text-4xl md:text-5xl font-bold tracking-tight text-white font-sans">
+                    Armored Security Suite
                 </h2>
-                <p class="text-slate-300 mt-4 text-base md:text-lg">
-                    Discover the cutting-edge features that set Allo•Alu apart as a modern, secure, and user-centric peer-to-peer messaging solution.
+                <p class="text-slate-300 mt-4 text-base md:text-lg font-mono">
+                    Zero compromises. Built specifically to protect your cryptographic identity, conversations, and assets from local malware and physical tampering.
                 </p>
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Feature 1: Pinata Cloud -->
-                <div class="p-8 rounded-2xl bg-cosmic-950/60 border border-white/10 hover:border-cosmic-glow/50 transition-all duration-300 flex flex-col hover:-translate-y-1 shadow-lg hover:shadow-[0_20px_40px_rgba(168,85,247,0.15)] group">
-                    <div class="w-12 h-12 rounded-xl bg-cosmic-glow/10 border border-cosmic-glow/30 flex items-center justify-center text-cosmic-glow mb-6 group-hover:scale-110 transition-transform">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-                        </svg>
+                <!-- Security 1: 100% On-Chain E2E -->
+                <div class="p-8 rounded-2xl bg-[#050c12]/90 border border-cosmic-accent/40 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+                    <div class="w-12 h-12 rounded-xl bg-cosmic-accent/10 border border-cosmic-accent/30 flex items-center justify-center text-cosmic-accent mb-6">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Pinata Cloud Media Integration</h3>
-                    <p class="text-slate-300 text-sm leading-relaxed">
-                        Seamlessly upload, store, and display high-quality images and media using Pinata (IPFS). Benefit from decentralized storage without sacrificing speed or performance.
+                    <h3 class="text-lg font-mono font-bold text-white mb-2 uppercase tracking-wide">100% On-Chain E2E Encryption</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed font-sans">
+                        All chat messages are wrapped inside fully encrypted transaction payloads directly on the Algorand ledger. No databases to hack, no intermediate servers, and absolute permanence.
                     </p>
                 </div>
 
-                <!-- Feature 2: Separated Contacts Hub -->
-                <div class="p-8 rounded-2xl bg-cosmic-950/60 border border-white/10 hover:border-cosmic-accent/50 transition-all duration-300 flex flex-col hover:-translate-y-1 shadow-lg hover:shadow-[0_20px_40px_rgba(59,130,246,0.15)] group">
-                    <div class="w-12 h-12 rounded-xl bg-cosmic-accent/10 border border-cosmic-accent/30 flex items-center justify-center text-cosmic-accent mb-6 group-hover:scale-110 transition-transform">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
+                <!-- Security 2: Security Throttling -->
+                <div class="p-8 rounded-2xl bg-[#14050d]/90 border border-cosmic-coral/40 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+                    <div class="w-12 h-12 rounded-xl bg-cosmic-coral/10 border border-cosmic-coral/30 flex items-center justify-center text-cosmic-coral mb-6">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">"Others" &amp; Separated Contacts Hub</h3>
-                    <p class="text-slate-300 text-sm leading-relaxed">
-                        A smart contact management system where standard contacts and unrecognized/external contacts are kept in separate, dedicated tabs ("Inbox/Contacts" vs. "Others") to reduce clutter.
+                    <h3 class="text-lg font-mono font-bold text-white mb-2 uppercase tracking-wide">Brute-Force Protection</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed font-sans">
+                        Dynamic lockout defense mechanisms. The application instantly freezes all authentication routes for 1 minute after exactly 3 consecutive incorrect password attempts, protecting your keys from brute-force scripts.
                     </p>
                 </div>
 
-                <!-- Feature 3: Biometric Authentication -->
-                <div class="p-8 rounded-2xl bg-cosmic-950/60 border border-white/10 hover:border-cosmic-teal/50 transition-all duration-300 flex flex-col hover:-translate-y-1 shadow-lg hover:shadow-[0_20px_40px_rgba(16,185,129,0.15)] group">
-                    <div class="w-12 h-12 rounded-xl bg-cosmic-teal/10 border border-cosmic-teal/30 flex items-center justify-center text-cosmic-teal mb-6 group-hover:scale-110 transition-transform">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 009 11.571V11a4 4 0 118 0v.571c0 .545.064 1.085.19 1.611l.124.512m-9.48 2.037a13.916 13.916 0 01-1.397-5.591c0-2.52.398-5.02 1.171-7.411m9.08 7.411c.427-.51.9-1.002 1.41-1.472M12 17.5c-2.33 0-4.518-.397-6.55-1.11m13.1-2.643a9.045 9.045 0 011.855-2.408M12 17.5a13.982 13.982 0 001.397-5.591M12 17.5c.343 0 .68-.018 1.012-.053m0 0a13.917 13.917 0 005.151-2.223m-5.151 2.223a14.02 14.02 0 002.3-5.591M3 7.25c1.352-1.127 2.87-2.008 4.5-2.62M17 4.63a12.93 12.93 0 014.5 2.62" />
-                        </svg>
+                <!-- Security 3: Biometric Auth -->
+                <div class="p-8 rounded-2xl bg-[#040f0c]/90 border border-cosmic-teal/40 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+                    <div class="w-12 h-12 rounded-xl bg-cosmic-teal/10 border border-cosmic-teal/30 flex items-center justify-center text-cosmic-teal mb-6">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 009 11.571V11a4 4 0 118 0v.571c0 .545.064 1.085.19 1.611l.124.512m-9.48 2.037a13.916 13.916 0 01-1.397-5.591c0-2.52.398-5.02 1.171-7.411m9.08 7.411c.427-.51.9-1.002 1.41-1.472M12 17.5c-2.33 0-4.518-.397-6.55-1.11m13.1-2.643a9.045 9.045 0 011.855-2.408M12 17.5a13.982 13.982 0 001.397-5.591M12 17.5c.343 0 .68-.018 1.012-.053m0 0a13.917 13.917 0 005.151-2.223m-5.151 2.223a14.02 14.02 0 002.3-5.591M3 7.25c1.352-1.127 2.87-2.008 4.5-2.62M17 4.63a12.93 12.93 0 014.5 2.62" /></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Biometric Authentication</h3>
-                    <p class="text-slate-300 text-sm leading-relaxed">
-                        Quick and secure login capabilities using fingerprint or facial recognition (Touch ID / Face ID) to easily shield your messages from offline intruders.
+                    <h3 class="text-lg font-mono font-bold text-white mb-2 uppercase tracking-wide">Biometric Security Shield</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed font-sans">
+                        Integrates system-level BiometricPrompt (Touch ID / Face ID) to authenticate wallet queries. Protects message reading and key exports instantly with hardware security.
                     </p>
                 </div>
 
-                <!-- Feature 4: Security Throttling -->
-                <div class="p-8 rounded-2xl bg-cosmic-950/60 border border-white/10 hover:border-cosmic-coral/50 transition-all duration-300 flex flex-col hover:-translate-y-1 shadow-lg hover:shadow-[0_20px_40px_rgba(244,63,94,0.15)] group">
-                    <div class="w-12 h-12 rounded-xl bg-cosmic-coral/10 border border-cosmic-coral/30 flex items-center justify-center text-cosmic-coral mb-6 group-hover:scale-110 transition-transform">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                        </svg>
+                <!-- Security 4: Screenshot Prevention -->
+                <div class="p-8 rounded-2xl bg-[#0c0514]/90 border border-cosmic-glow/40 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+                    <div class="w-12 h-12 rounded-xl bg-cosmic-glow/10 border border-cosmic-glow/30 flex items-center justify-center text-cosmic-glow mb-6">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Security Throttling</h3>
-                    <p class="text-slate-300 text-sm leading-relaxed">
-                        Robust brute-force defense that automatically locks login attempts for exactly 1 minute after 3 consecutive failed password entries, safeguarding your private seed phrase.
+                    <h3 class="text-lg font-mono font-bold text-white mb-2 uppercase tracking-wide">Screenshot Hardware Protection</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed font-sans">
+                        Uses Android's secure layout flag (FLAG_SECURE) to completely block screenshot captures and overlay attacks. Screen recordings of private channels output as pitch black.
                     </p>
                 </div>
 
-                <!-- Feature 5: Smart Search -->
-                <div class="p-8 rounded-2xl bg-cosmic-950/60 border border-white/10 hover:border-cosmic-glow/50 transition-all duration-300 flex flex-col hover:-translate-y-1 shadow-lg hover:shadow-[0_20px_40px_rgba(168,85,247,0.15)] group">
-                    <div class="w-12 h-12 rounded-xl bg-cosmic-glow/10 border border-cosmic-glow/30 flex items-center justify-center text-cosmic-glow mb-6 group-hover:scale-110 transition-transform">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
+                <!-- Security 5: Hardened Local Database -->
+                <div class="p-8 rounded-2xl bg-[#040f0c]/90 border border-cosmic-teal/40 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+                    <div class="w-12 h-12 rounded-xl bg-cosmic-teal/10 border border-cosmic-teal/30 flex items-center justify-center text-cosmic-teal mb-6">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" /></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Smart Search &amp; Categorization</h3>
-                    <p class="text-slate-300 text-sm leading-relaxed">
-                        An intelligent, localized search engine that filters through your contacts, public chats, and note archives instantly as you type with zero delay.
+                    <h3 class="text-lg font-mono font-bold text-white mb-2 uppercase tracking-wide">SQLCipher Room Database</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed font-sans">
+                        Local cached messages, contacts directory, and keys are encrypted using a randomized, hardware-tied key in the Keystore and stored under standard AES-256 local database containers.
                     </p>
                 </div>
 
-                <!-- Feature 6: Offline Mode Support -->
-                <div class="p-8 rounded-2xl bg-cosmic-950/60 border border-white/10 hover:border-cosmic-accent/50 transition-all duration-300 flex flex-col hover:-translate-y-1 shadow-lg hover:shadow-[0_20px_40px_rgba(59,130,246,0.15)] group">
-                    <div class="w-12 h-12 rounded-xl bg-cosmic-accent/10 border border-cosmic-accent/30 flex items-center justify-center text-cosmic-accent mb-6 group-hover:scale-110 transition-transform">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
-                        </svg>
+                <!-- Security 6: Serverless Immunity -->
+                <div class="p-8 rounded-2xl bg-[#050c12]/90 border border-cosmic-accent/40 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+                    <div class="w-12 h-12 rounded-xl bg-cosmic-accent/10 border border-cosmic-accent/30 flex items-center justify-center text-cosmic-accent mb-6">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Offline Mode Support</h3>
-                    <p class="text-slate-300 text-sm leading-relaxed">
-                        State-of-the-art caching mechanism that stores messages, contacts, and note data locally, allowing uninterrupted read access and drafting even with no active internet.
+                    <h3 class="text-lg font-mono font-bold text-white mb-2 uppercase tracking-wide">Zero External Backend Relays</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed font-sans">
+                        Allo•Alu talks directly to peer addresses over Algorand. There are no proprietary databases, relay channels, or servers to fail, log IPs, sell data, or shut down.
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Decentralized Multimedia & Private Notepad -->
-    <section id="web3-benefits" class="py-24 px-6 md:px-12 max-w-7xl mx-auto relative">
-        <div class="absolute -top-10 left-1/3 w-72 h-72 bg-cosmic-teal/10 blur-[120px] rounded-full pointer-events-none"></div>
-        <div class="absolute -bottom-10 right-1/3 w-80 h-80 bg-cosmic-accent/15 blur-[140px] rounded-full pointer-events-none"></div>
-
+    <!-- SECTION 2: FULL APP FUNCTIONALITY BREAKDOWN -->
+    <section id="features" class="py-24 px-6 md:px-12 max-w-7xl mx-auto">
         <div class="text-center max-w-3xl mx-auto mb-16">
-            <span class="text-xs font-mono font-bold text-cosmic-glow uppercase tracking-widest">A New Era of Sovereignty</span>
-            <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white font-mono mt-2">
-                Decentralized Media & Your Private Notepad
+            <span class="inline-flex items-center space-x-2 px-3 py-1 bg-cosmic-glow/20 border border-cosmic-glow/40 rounded-full text-xs font-mono text-cosmic-glow uppercase tracking-wider mb-3">
+                🔥 Complete Ecosystem
+            </span>
+            <h2 class="text-4xl md:text-5xl font-bold tracking-tight text-white font-sans">
+                Full Messenger Functionality
             </h2>
-            <p class="text-slate-400 mt-4 text-base md:text-lg">
-                We free you from centralized clouds and censorship. Discover unique features of Allo•Alu designed for total freedom and ultimate data security.
+            <p class="text-slate-400 mt-4 text-base md:text-lg font-mono">
+                Sovereign tools to manage secure peer-to-peer chats, shared multimedia files, and notes.
             </p>
         </div>
 
-        <div class="grid lg:grid-cols-12 gap-8 items-stretch">
-            <!-- Private Notepad on Algorand -->
-            <div class="lg:col-span-5 p-8 rounded-2xl glass-panel border border-cosmic-teal/20 hover:border-cosmic-teal/40 transition-all flex flex-col justify-between relative overflow-hidden group">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-cosmic-teal/5 rounded-full blur-2xl group-hover:bg-cosmic-teal/10 transition-colors"></div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Func 1 -->
+            <div class="p-6 rounded-2xl bg-cosmic-800/40 border border-white/5 flex flex-col justify-between">
                 <div>
-                    <div class="w-12 h-12 rounded-xl bg-cosmic-teal/10 border border-cosmic-teal/20 flex items-center justify-center text-cosmic-teal mb-6">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                        </svg>
-                    </div>
-                    <span class="text-xs font-mono font-bold text-cosmic-teal uppercase tracking-wider block mb-2">100% On-Chain & Encrypted</span>
-                    <h3 class="text-2xl font-bold text-white mb-4 font-mono">Private Notepad on Algorand</h3>
-                    <p class="text-slate-300 text-sm leading-relaxed mb-6">
-                        Allo•Alu is more than just a messenger for your friends. Inside the application, you'll find your personal, ultra-secure notepad. Safely store critical seed phrases, private keys, passwords, or confidential notes knowing they are instantly encrypted and saved securely onto the decentralized Algorand blockchain.
+                    <div class="text-2xl mb-4">💬</div>
+                    <h4 class="text-white font-bold text-base font-mono uppercase tracking-wide mb-2">P2P Secure Messaging</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Anchor decentralized conversations in real time using secure Algorand payloads with extreme speed (under 2.8s) and direct keypair handshakes.
                     </p>
-                    <div class="p-4 bg-cosmic-950/60 rounded-xl border border-white/5 space-y-2 text-xs">
-                        <div class="flex items-center space-x-2">
-                            <span class="text-cosmic-teal">✔</span>
-                            <span class="text-slate-300 font-mono">Only accessible by you (your own keys)</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <span class="text-cosmic-teal">✔</span>
-                            <span class="text-slate-300 font-mono">Immune to device loss or server crashes</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <span class="text-cosmic-teal">✔</span>
-                            <span class="text-slate-300 font-mono">Military-grade cryptographic shield</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="pt-6 border-t border-white/5 mt-6 flex justify-between items-center text-xs font-mono">
-                    <span class="text-slate-400">Your Ultimate Benefit:</span>
-                    <span class="text-cosmic-teal font-bold flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-cosmic-teal animate-pulse mr-1.5"></span>Encrypted On-Chain</span>
                 </div>
             </div>
 
-            <!-- Pinata Cloud (Outstanding highlighted card) -->
-            <div class="lg:col-span-7 p-8 rounded-2xl bg-gradient-to-br from-cosmic-accent/10 via-cosmic-glow/5 to-transparent border border-cosmic-accent/30 hover:border-cosmic-accent/50 transition-all flex flex-col justify-between relative overflow-hidden group shadow-xl shadow-cosmic-accent/5">
-                <div class="absolute -top-12 -right-12 w-48 h-48 bg-cosmic-accent/10 rounded-full blur-3xl group-hover:bg-cosmic-accent/15 transition-all"></div>
+            <!-- Func 2 -->
+            <div class="p-6 rounded-2xl bg-cosmic-800/40 border border-white/5 flex flex-col justify-between">
                 <div>
-                    <div class="flex justify-between items-start mb-6">
-                        <div class="w-12 h-12 rounded-xl bg-cosmic-accent/15 border border-cosmic-accent/25 flex items-center justify-center text-cosmic-accent">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
-                        </div>
-                        <span class="text-xs bg-cosmic-accent/20 text-cosmic-accent border border-cosmic-accent/30 px-3 py-1 rounded-full font-mono font-bold animate-pulse">Send Images</span>
-                    </div>
-                    <span class="text-xs font-mono font-bold text-cosmic-accent uppercase tracking-wider block mb-2">Decentralized IPFS Transfer</span>
-                    <h3 class="text-2xl font-bold text-white mb-4 font-mono">Secure Image Sharing with Pinata.cloud</h3>
-                    <p class="text-slate-300 text-sm leading-relaxed mb-6">
-                        Allo•Alu is 100% server-less and operates without centralized intermediary nodes storing your files. To enable private, censorship-resistant image sharing, we integrated IPFS support via Pinata.cloud. You stay in total control of your media!
+                    <div class="text-2xl mb-4">📂</div>
+                    <h4 class="text-white font-bold text-base font-mono uppercase tracking-wide mb-2">Separated Contacts Hub</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Smarter organization. Automatically segment verified friends ("Inbox/Contacts") from unapproved external entries ("Others") to keep your dashboard clean.
                     </p>
+                </div>
+            </div>
+
+            <!-- Func 3 -->
+            <div class="p-6 rounded-2xl bg-cosmic-800/40 border border-white/5 flex flex-col justify-between">
+                <div>
+                    <div class="text-2xl mb-4">🔍</div>
+                    <h4 class="text-white font-bold text-base font-mono uppercase tracking-wide mb-2">Smart Instant Search</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Localized, high-speed filters parse through notes, chat histories, contact logs, and wallet addresses on-the-fly as you type.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Func 4 -->
+            <div class="p-6 rounded-2xl bg-cosmic-800/40 border border-white/5 flex flex-col justify-between">
+                <div>
+                    <div class="text-2xl mb-4">⚡</div>
+                    <h4 class="text-white font-bold text-base font-mono uppercase tracking-wide mb-2">Offline Support</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Uninterrupted reading. View your cached chat history, modify details, and draft messages locally without any internet connection.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Func 5 -->
+            <div class="p-6 rounded-2xl bg-cosmic-800/40 border border-white/5 flex flex-col justify-between">
+                <div>
+                    <div class="text-2xl mb-4">📝</div>
+                    <h4 class="text-white font-bold text-base font-mono uppercase tracking-wide mb-2">Encrypted Notepad</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        An integrated, military-grade private notepad. Encrypt and back up seed phrases, keys, or passwords permanently on the blockchain.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Func 6 -->
+            <div class="p-6 rounded-2xl bg-cosmic-800/40 border border-white/5 flex flex-col justify-between">
+                <div>
+                    <div class="text-2xl mb-4">🛡️</div>
+                    <h4 class="text-white font-bold text-base font-mono uppercase tracking-wide mb-2">Pre-Flight Safe Guard</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Prevents failed gas fees. The system automatically restricts outgoing transactions if your wallet drops below 0.101 ALGO.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Func 7 -->
+            <div class="p-6 rounded-2xl bg-cosmic-800/40 border border-white/5 flex flex-col justify-between">
+                <div>
+                    <div class="text-2xl mb-4">🖼️</div>
+                    <h4 class="text-white font-bold text-base font-mono uppercase tracking-wide mb-2">Decentralized IPFS Files</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Share high-fidelity media securely without centralized cloud middlemen using direct IPFS pin links.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Func 8 -->
+            <div class="p-6 rounded-2xl bg-cosmic-800/40 border border-white/5 flex flex-col justify-between">
+                <div>
+                    <div class="text-2xl mb-4">🌿</div>
+                    <h4 class="text-white font-bold text-base font-mono uppercase tracking-wide mb-2">Green Consensus</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Chat guilt-free. Supported by Algorand's carbon-negative Pure Proof of Stake network layout.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: PINATA CLOUD DECENTRALIZED IMAGE SETUP -->
+    <section id="pinata" class="py-24 bg-cosmic-900 border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 grid lg:grid-cols-12 gap-12 items-center">
+            
+            <div class="lg:col-span-5 flex flex-col space-y-6">
+                <span class="text-xs font-mono font-bold text-cosmic-accent uppercase tracking-widest">Decentralized Storage Setup</span>
+                <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white font-sans">
+                    IPFS Media Sharing via Pinata
+                </h2>
+                <p class="text-slate-300 leading-relaxed font-mono text-sm">
+                    Because Allo•Alu does not have central servers, we leverage the power of the InterPlanetary File System (IPFS) to let you send pictures. Setting up your secure gateway takes under a minute.
+                </p>
+                <div class="p-4 bg-cosmic-950 rounded-xl border border-white/5 flex items-center space-x-3 text-xs text-cosmic-teal">
+                    <span>✔</span>
+                    <span class="font-mono">No middleman ever reviews, filters, or censors your media.</span>
+                </div>
+            </div>
+
+            <div class="lg:col-span-7 bg-cosmic-800/50 p-8 rounded-3xl border border-white/10 shadow-xl">
+                <h4 class="text-white font-mono text-xs font-bold uppercase tracking-wider mb-6">Easy 3-Step Integration:</h4>
+                <div class="space-y-6 font-mono text-xs">
+                    <div class="flex items-start space-x-4">
+                        <span class="w-6 h-6 rounded-full bg-cosmic-accent/20 text-cosmic-accent border border-cosmic-accent/30 flex items-center justify-center font-bold flex-shrink-0">1</span>
+                        <div>
+                            <span class="text-white font-bold block mb-1">Create free Pinata Account</span>
+                            <p class="text-slate-400 leading-relaxed">Go to <a href="https://pinata.cloud/" target="_blank" class="text-cosmic-accent hover:underline font-bold">Pinata.cloud</a> and register. No credit card is required.</p>
+                        </div>
+                    </div>
                     
-                    <h4 class="text-white font-mono text-xs font-bold uppercase tracking-wider mb-3">Quick setup in 4 simple steps:</h4>
-                    <div class="grid sm:grid-cols-2 gap-4 text-xs font-mono mb-6">
-                        <div class="p-3 bg-cosmic-950/60 rounded-xl border border-white/5">
-                            <span class="text-cosmic-accent font-bold block mb-1">1. Create an Account</span>
-                            <span class="text-slate-400">Register a free account at <a href="https://pinata.cloud/" target="_blank" class="text-cosmic-accent hover:underline font-bold">Pinata.cloud</a>.</span>
+                    <div class="flex items-start space-x-4">
+                        <span class="w-6 h-6 rounded-full bg-cosmic-glow/20 text-cosmic-glow border border-cosmic-glow/30 flex items-center justify-center font-bold flex-shrink-0">2</span>
+                        <div>
+                            <span class="text-white font-bold block mb-1">Generate API JWT Key</span>
+                            <p class="text-slate-400 leading-relaxed mb-2">Create a "New Key" with Admin capabilities or ensure custom Scopes include:</p>
+                            <ul class="space-y-1 text-slate-300">
+                                <li>• <strong class="text-cosmic-accent">Files</strong> ➔ Write</li>
+                                <li>• <strong class="text-cosmic-accent">Pinning</strong> ➔ pinFileToIPFS &amp; pinning/pinFileToIPFS</li>
+                            </ul>
                         </div>
-                        <div class="p-3 bg-cosmic-950/60 rounded-xl border border-white/5 shadow-inner">
-                            <span class="text-cosmic-accent font-bold block mb-1">2. Create API Key & Scopes</span>
-                            <span class="text-slate-400 leading-normal">
-                                Click **"New Key"**. The easiest option is to enable the <strong class="text-cosmic-accent">Admin (All Permissions)</strong> toggle. 
-                                <span class="block mt-2 text-slate-300">Alternatively, custom scopes **MUST** include:</span>
-                                <span class="block text-[11px] text-slate-300">• **Files** ➔ <strong class="text-cosmic-accent">Write</strong></span>
-                                <span class="block text-[11px] text-slate-300">• **Pinning** ➔ <strong class="text-cosmic-accent">pinFileToIPFS</strong> and <strong class="text-cosmic-accent">pinning/pinFileToIPFS</strong></span>
-                            </span>
-                        </div>
-                        <div class="p-3 bg-cosmic-950/60 rounded-xl border border-white/5">
-                            <span class="text-cosmic-accent font-bold block mb-1">3. Copy JWT Token</span>
-                            <span class="text-slate-400">Copy the long string (JWT Token) provided by Pinata.</span>
-                        </div>
-                        <div class="p-3 bg-cosmic-950/60 rounded-xl border border-white/5">
-                            <span class="text-cosmic-accent font-bold block mb-1">4. Paste into Allo•Alu</span>
-                            <span class="text-slate-400">Navigate to Settings inside the app and paste the token. You're set!</span>
+                    </div>
+
+                    <div class="flex items-start space-x-4">
+                        <span class="w-6 h-6 rounded-full bg-cosmic-teal/20 text-cosmic-teal border border-cosmic-teal/30 flex items-center justify-center font-bold flex-shrink-0">3</span>
+                        <div>
+                            <span class="text-white font-bold block mb-1">Paste JWT inside the App</span>
+                            <p class="text-slate-400 leading-relaxed">Copy the long JWT token string from Pinata, open Allo•Alu, head to Settings, and paste it. You are ready to share encrypted photos!</p>
                         </div>
                     </div>
                 </div>
-                <div class="pt-6 border-t border-white/5 mt-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 text-xs font-mono">
-                    <span class="text-slate-400">Your Ultimate Benefit:</span>
-                    <span class="text-cosmic-accent font-bold">Absolute control of your media with zero middlemen</span>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 4: ECONOMICS MATRIX (ZERO-AD TRANSPARENCY) -->
+    <section id="economics" class="py-24 max-w-7xl mx-auto px-6 md:px-12">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="inline-flex items-center space-x-2 px-3 py-1 bg-cosmic-teal/20 border border-cosmic-teal/40 rounded-full text-xs font-mono text-cosmic-teal uppercase tracking-wider mb-3">
+                ⚖ No Hidden Fees
+            </span>
+            <h2 class="text-4xl md:text-5xl font-bold tracking-tight text-white font-sans">
+                True Serverless Cost Matrix
+            </h2>
+            <p class="text-slate-400 mt-4 text-base md:text-lg font-mono">
+                Comparison of the true financial cost. Zero ads, zero monthly premiums, and no developer cuts.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12 items-stretch">
+            <!-- Web3 Sovereign Model -->
+            <div class="p-8 rounded-3xl bg-cosmic-800/80 border-2 border-cosmic-teal/30 flex flex-col justify-between">
+                <div>
+                    <span class="text-xs font-mono font-bold text-cosmic-teal uppercase tracking-wider block mb-2">Sovereign Web3 Paradigm</span>
+                    <h3 class="text-2xl font-bold text-white mb-6 font-mono">Allo•Alu Ledger Routing</h3>
+                    
+                    <div class="space-y-4 font-mono text-xs mb-8">
+                        <div class="flex justify-between border-b border-white/5 py-2">
+                            <span class="text-slate-400">Application Price</span>
+                            <span class="text-cosmic-teal font-bold">$0.00 (MIT Free)</span>
+                        </div>
+                        <div class="flex justify-between border-b border-white/5 py-2">
+                            <span class="text-slate-400">Cost Per Message</span>
+                            <span class="text-cosmic-teal font-bold">0.001 ALGO (~$0.0001)</span>
+                        </div>
+                        <div class="flex justify-between border-b border-white/5 py-2">
+                            <span class="text-slate-400">Required Deposit</span>
+                            <span class="text-white">0.101 ALGO (Reserved)</span>
+                        </div>
+                        <div class="flex justify-between border-b border-white/5 py-2">
+                            <span class="text-slate-400">Data Exploitation</span>
+                            <span class="text-cosmic-teal font-bold">Zero (No Logs)</span>
+                        </div>
+                        <div class="flex justify-between py-2">
+                            <span class="text-slate-400">In-App Advertising</span>
+                            <span class="text-cosmic-teal font-bold">None</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 bg-cosmic-950 rounded-xl border border-white/5 text-xs text-slate-300 leading-relaxed font-mono">
+                    💡 <strong>10,000 Messages cost only ~1 USD.</strong> 100% of these gas fees are paid directly to Algorand decentralized validators to power safe, forkless finality.
+                </div>
+            </div>
+
+            <!-- Web2 Central Model -->
+            <div class="p-8 rounded-3xl bg-cosmic-800/30 border border-white/5 flex flex-col justify-between">
+                <div>
+                    <span class="text-xs font-mono font-bold text-slate-500 uppercase tracking-wider block mb-2">Legacy Web2 Paradigm</span>
+                    <h3 class="text-2xl font-bold text-slate-400 mb-6 font-mono">Traditional Centralized Apps</h3>
+                    
+                    <div class="space-y-4 font-mono text-xs mb-8 text-slate-400">
+                        <div class="flex justify-between border-b border-white/5 py-2">
+                            <span>Monthly Subscription</span>
+                            <span class="text-cosmic-coral font-bold">$4.99 - $12.99 / mo</span>
+                        </div>
+                        <div class="flex justify-between border-b border-white/5 py-2">
+                            <span>Cost Per Message</span>
+                            <span class="text-cosmic-coral">Your Private Data</span>
+                        </div>
+                        <div class="flex justify-between border-b border-white/5 py-2">
+                            <span>Middleman Databases</span>
+                            <span class="text-cosmic-coral">Logs IPs &amp; Keys</span>
+                        </div>
+                        <div class="flex justify-between border-b border-white/5 py-2">
+                            <span>Ad Trackers</span>
+                            <span class="text-cosmic-coral">Active Retargeting</span>
+                        </div>
+                        <div class="flex justify-between py-2">
+                            <span>Server Stability</span>
+                            <span class="text-cosmic-coral">Frequent Central Outages</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 bg-cosmic-950/40 rounded-xl border border-white/5 text-xs text-slate-500 leading-relaxed font-mono">
+                    ⚠️ Legacy communication is "free" because you are the product. Your metadata, contact lists, and message packets are mapped, sold, and logged on corporate servers.
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Detailed Micro-Fees Section -->
-    <section id="fee-structure" class="py-24 bg-cosmic-900 border-y border-white/5 px-6 md:px-12">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-xs font-mono font-bold text-cosmic-accent uppercase tracking-widest">Pricing Transparency</span>
-                <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white font-mono mt-2">
-                    Completely Free App, Near-Zero Network Fees
-                </h2>
-                <p class="text-slate-400 mt-4 text-base md:text-lg">
-                    We charge absolutely nothing. No subscriptions, no tokens, no registration fees. You only pay the direct Algorand network fee to deliver your secure payloads.
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-12 items-stretch">
-                <!-- Card 1: Network Fees -->
-                <div class="p-8 rounded-2xl bg-cosmic-800/80 border border-white/5 flex flex-col justify-between glow-card-teal">
-                    <div>
-                        <div class="flex justify-between items-center mb-6">
-                            <span class="text-xs font-mono font-bold text-cosmic-teal uppercase tracking-wider">Per-Message Gas</span>
-                            <span class="text-xs bg-cosmic-teal/10 text-cosmic-teal px-3 py-1 rounded-full font-mono font-bold">Hyper-Cheap</span>
-                        </div>
-                        <h3 class="text-2xl font-bold text-white mb-3">0.001 ALGO Network Fee</h3>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
-                            Every time you send an encrypted message, it is written as a secure transaction payload directly on the Algorand ledger. The cost for this is standard network gas: exactly <strong>0.001 ALGO</strong> (which is roughly <strong>$0.0001</strong>). You can send 10,000 messages for about one dollar!
-                        </p>
-                        <ul class="space-y-2 text-xs text-slate-400 font-mono mb-6">
-                            <li class="flex items-center"><span class="text-cosmic-teal mr-2">✔</span> 100% of the fee goes to Algorand consensus validators</li>
-                            <li class="flex items-center"><span class="text-cosmic-teal mr-2">✔</span> Zero developer surcharges or transaction cuts</li>
-                            <li class="flex items-center"><span class="text-cosmic-teal mr-2">✔</span> No hidden costs or gas spikes (fixed flat fee)</li>
-                        </ul>
-                    </div>
-                    <div class="p-4 bg-cosmic-950 rounded-xl border border-white/5 flex justify-between items-center text-sm font-mono">
-                        <span class="text-slate-400">Message Cost:</span>
-                        <span class="text-cosmic-teal font-bold">~0.0001 USD</span>
-                    </div>
-                </div>
-
-                <!-- Card 2: Minimum Balance Requirement -->
-                <div class="p-8 rounded-2xl bg-cosmic-800/80 border border-white/5 flex flex-col justify-between glow-card-purple">
-                    <div>
-                        <div class="flex justify-between items-center mb-6">
-                            <span class="text-xs font-mono font-bold text-cosmic-glow uppercase tracking-wider">Anti-Spam Requirement</span>
-                            <span class="text-xs bg-cosmic-glow/10 text-cosmic-glow px-3 py-1 rounded-full font-mono font-bold">Required to Send</span>
-                        </div>
-                        <h3 class="text-2xl font-bold text-white mb-3">0.101 ALGO Setup Minimum</h3>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
-                            To protect the Algorand network from malicious transaction spam, the ledger mandates that every active address hold a Minimum Balance (MBR) of <strong>0.1 ALGO</strong>. To send your first message, your wallet must hold at least <strong>0.101 ALGO</strong> (0.1 ALGO reserve + 0.001 ALGO gas).
-                        </p>
-                        <ul class="space-y-2 text-xs text-slate-400 font-mono mb-6">
-                            <li class="flex items-center"><span class="text-cosmic-glow mr-2">ℹ</span> The 0.1 ALGO is not spent; it remains reserved in your wallet</li>
-                            <li class="flex items-center"><span class="text-cosmic-glow mr-2">ℹ</span> Guardrail alerts in the app keep you from sending when balance is low</li>
-                            <li class="flex items-center"><span class="text-cosmic-glow mr-2">ℹ</span> Your funds never leave your secure wallet</li>
-                        </ul>
-                    </div>
-                    <div class="p-4 bg-cosmic-950 rounded-xl border border-white/5 flex justify-between items-center text-sm font-mono">
-                        <span class="text-slate-400">Total Recommended Deposit:</span>
-                        <span class="text-cosmic-glow font-bold">0.5 - 1.0 ALGO (~$0.10)</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why Algorand Advantages Section -->
-    <section id="algorand-advantages" class="py-24 px-6 md:px-12 max-w-7xl mx-auto">
-        <div class="grid lg:grid-cols-12 gap-16 items-center">
-            <div class="lg:col-span-5 flex justify-center">
-                <div class="w-full max-w-md p-8 rounded-3xl bg-gradient-to-tr from-cosmic-accent/10 to-cosmic-glow/10 border border-white/5 relative overflow-hidden">
-                    <div class="absolute -top-10 -right-10 w-40 h-40 bg-cosmic-teal/10 blur-[50px] rounded-full"></div>
-                    <h3 class="text-2xl font-bold text-white mb-6 font-mono tracking-tight">The Algorand Advantage</h3>
-                    <div class="space-y-6">
-                        <div class="flex space-x-4">
-                            <span class="text-2xl">⚡</span>
-                            <div>
-                                <h4 class="font-bold text-white text-sm">Instant Forkless Finality</h4>
-                                <p class="text-xs text-slate-300 mt-1">Transactions finalize in 2.8 seconds with 100% mathematical certainty. Your messages deliver instantly and permanently.</p>
-                            </div>
-                        </div>
-                        <div class="flex space-x-4">
-                            <span class="text-2xl">🛡️</span>
-                            <div>
-                                <h4 class="font-bold text-white text-sm">Pure Proof of Stake (PPoS)</h4>
-                                <p class="text-xs text-slate-300 mt-1">Highly decentralized security with no chance of split chains, ensuring your communications remain fully chronological and intact.</p>
-                            </div>
-                        </div>
-                        <div class="flex space-x-4">
-                            <span class="text-2xl">🌿</span>
-                            <div>
-                                <h4 class="font-bold text-white text-sm">Environmentally Clean</h4>
-                                <p class="text-xs text-slate-300 mt-1">Algorand operates with a carbon-negative footprint. Chat all day guilt-free on a clean ledger.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="lg:col-span-7 flex flex-col space-y-6">
-                <span class="text-xs font-mono font-bold text-cosmic-teal uppercase tracking-widest">Consensus Mechanics</span>
-                <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white font-mono">
-                    Why We Built on the Algorand Network
-                </h2>
-                <p class="text-slate-300 leading-relaxed text-base">
-                    Traditional blockchains like Ethereum suffer from congested lanes, gas bidding wars, and unpredictable wait times. By choosing Algorand, Allo•Alu provides a messaging experience that is as fluid, fast, and smooth as a Web2 app, while retaining full cryptographic, server-less isolation.
-                </p>
-                <div class="grid sm:grid-cols-2 gap-6 pt-4">
-                    <div class="p-5 rounded-xl bg-cosmic-800/50 border border-white/5">
-                        <h4 class="font-bold text-white text-sm font-mono">&lt; $0.0001 Gas Cost</h4>
-                        <p class="text-xs text-slate-400 mt-2">Extremely cheap transactions allow us to keep the messenger entirely subscription-free forever.</p>
-                    </div>
-                    <div class="p-5 rounded-xl bg-cosmic-800/50 border border-white/5">
-                        <h4 class="font-bold text-white text-sm font-mono">Forkless Consensus</h4>
-                        <p class="text-xs text-slate-400 mt-2">Guarantees that your sent messages are immediately immutable and cannot be undone or reordered.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Technical Specifications / Guardrails -->
-    <section id="specs" class="py-24 bg-cosmic-800/30 border-y border-white/5 px-6 md:px-12">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-            <div>
-                <h3 class="text-3xl font-bold text-white font-mono mb-6">
-                    Hardened Security Guardrails
-                </h3>
-                <p class="text-slate-400 text-sm leading-relaxed mb-6">
-                    Allo•Alu is programmed to keep you safe from common transaction drops and optical surveillance. It actively monitors device state to protect your environment.
-                </p>
-
-                <div class="space-y-4 text-sm font-mono">
-                    <div class="flex justify-between border-b border-white/5 py-3">
-                        <span class="text-slate-400">Balance Safe Trigger</span>
-                        <span class="text-white font-bold text-amber-400">&gt; 0.101 ALGO Required</span>
-                    </div>
-                    <div class="flex justify-between border-b border-white/5 py-3">
-                        <span class="text-slate-400">Screenshot Protection</span>
-                        <span class="text-white">Active (Hardware Shielded)</span>
-                    </div>
-                    <div class="flex justify-between border-b border-white/5 py-3">
-                        <span class="text-slate-400">Gas Finality Speed</span>
-                        <span class="text-white">Under 2.8 Seconds</span>
-                    </div>
-                    <div class="flex justify-between py-3">
-                        <span class="text-slate-400">Identity Layer</span>
-                        <span class="text-cosmic-teal font-bold">Algorand Address-First</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="p-8 rounded-3xl bg-gradient-to-br from-amber-500/10 to-transparent border border-amber-500/10 flex flex-col justify-between">
-                <div class="flex items-center space-x-3 mb-4">
-                    <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 border border-amber-500/20">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
-                    </div>
-                    <h4 class="text-lg font-bold text-white">Pre-Flight Balance Safekeeping</h4>
-                </div>
-                <p class="text-slate-300 text-sm leading-relaxed mb-6">
-                    Our dynamic wallet monitoring checks your balance before anchoring any payload on-chain. If your balance drops below the threshold, the app safely locks outbound transmissions and triggers a warnings banner, saving you from accidental on-ledger failures or lost gas fees.
-                </p>
-                <div class="p-3 bg-cosmic-950 rounded-xl border border-white/5 flex items-center justify-between">
-                    <span class="text-xs text-amber-300 font-mono">SYSTEM_ALERT: INSUFFICIENT_FUNDS</span>
-                    <span class="text-[10px] bg-amber-500/20 text-amber-400 px-2.5 py-0.5 rounded font-mono font-bold">LOCKED</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
 
     <!-- Footer -->
-    <footer class="border-t border-white/5 py-12 px-6 md:px-12 bg-cosmic-950">
+    <footer class="border-t border-white/10 py-12 px-6 md:px-12 bg-cosmic-950 text-slate-400 font-mono text-xs">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
             <div class="flex items-center space-x-3">
                 <img src="assets/logo_v1.png" alt="Allo•Alu Logo" class="w-8 h-8 rounded-lg object-contain bg-cosmic-900 border border-white/10 shadow-md">
                 <span class="text-sm font-bold text-white font-mono">Allo•Alu</span>
             </div>
             
-            <span class="text-xs text-slate-500 font-mono md:order-last">© 2026 Allo•Alu Messenger. MIT Licensed. Built on Algorand.</span>
+            <span>© 2026 Allo•Alu Messenger. MIT Licensed. Built purely on the Algorand ledger.</span>
             
-            <div class="flex space-x-6 text-xs text-slate-400">
-                <a href="https://github.com/devitamine/Allo-Alu" target="_blank" class="hover:text-white transition-colors">GitHub Repository</a>
-                <a href="#fee-structure" class="hover:text-white transition-colors">Zero-Ad Policy</a>
-                <a href="#specs" class="hover:text-white transition-colors">OS Compatibility</a>
+            <div class="flex space-x-6 text-slate-400 text-[11px]">
+                <a href="https://github.com/devitamine/Allo-Alu" target="_blank" class="hover:text-white transition-colors">GitHub</a>
+                <a href="#economics" class="hover:text-white transition-colors">No-Ad Policy</a>
+                <a href="#security" class="hover:text-white transition-colors">Security Audit</a>
             </div>
         </div>
     </footer>
