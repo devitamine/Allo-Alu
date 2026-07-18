@@ -3744,6 +3744,11 @@ fun SettingsDialog(
     var isExportAuthorized by remember { mutableStateOf(false) }
     var isManualAuthorized by remember { mutableStateOf(false) }
     var showDeleteAccountConfirm by remember { mutableStateOf(false) }
+    var showMyQrInSettings by remember { mutableStateOf(false) }
+
+    if (showMyQrInSettings) {
+        ShowMyQrDialog(address = state.address, onDismiss = { showMyQrInSettings = false })
+    }
 
     val exportLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.CreateDocument("text/plain"),
@@ -3859,21 +3864,61 @@ fun SettingsDialog(
                     ) {
                         Column(modifier = Modifier.padding(16.dp).fillMaxWidth()) {
                             Row(
+                                modifier = Modifier.fillMaxWidth(),
                                 verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                horizontalArrangement = Arrangement.SpaceBetween
                             ) {
-                                Icon(
-                                    imageVector = Icons.Default.Person,
-                                    contentDescription = null,
-                                    tint = Color(0xFF80CBC4),
-                                    modifier = Modifier.size(18.dp)
-                                )
-                                Text(
-                                    "My Wallet Address",
-                                    color = Color.White,
-                                    fontSize = 14.sp,
-                                    fontWeight = FontWeight.Bold
-                                )
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.Person,
+                                        contentDescription = null,
+                                        tint = Color(0xFF80CBC4),
+                                        modifier = Modifier.size(18.dp)
+                                    )
+                                    Text(
+                                        "My Wallet Address",
+                                        color = Color.White,
+                                        fontSize = 14.sp,
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                }
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(4.dp)
+                                ) {
+                                    IconButton(
+                                        onClick = {
+                                            val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                                            val clip = ClipData.newPlainText("My Address", state.address)
+                                            clipboard.setPrimaryClip(clip)
+                                            Toast.makeText(context, "Address copied to clipboard", Toast.LENGTH_SHORT).show()
+                                        },
+                                        modifier = Modifier.size(32.dp)
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.Default.ContentCopy,
+                                            contentDescription = "Copy Address",
+                                            tint = Color(0xFF80CBC4),
+                                            modifier = Modifier.size(16.dp)
+                                        )
+                                    }
+                                    IconButton(
+                                        onClick = {
+                                            showMyQrInSettings = true
+                                        },
+                                        modifier = Modifier.size(32.dp)
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.Default.QrCode,
+                                            contentDescription = "Show QR Code",
+                                            tint = Color(0xFF80CBC4),
+                                            modifier = Modifier.size(16.dp)
+                                        )
+                                    }
+                                }
                             }
                             Spacer(modifier = Modifier.height(12.dp))
                             Text(

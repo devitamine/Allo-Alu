@@ -519,8 +519,16 @@ class ChatViewModel(context: Context) : ViewModel() {
             return
         }
         viewModelScope.launch(Dispatchers.IO) {
+            val trimmedAddr = address.trim()
+            val existing = repository.getContactByAddress(trimmedAddr)
+            if (existing != null) {
+                withContext(Dispatchers.Main) {
+                    _error.value = "Contact with this address already exists"
+                }
+                return@launch
+            }
             val contact = Contact(
-                address = address.trim(),
+                address = trimmedAddr,
                 nickname = nickname.trim(),
                 note = note.trim()
             )
@@ -534,8 +542,16 @@ class ChatViewModel(context: Context) : ViewModel() {
             return
         }
         viewModelScope.launch(Dispatchers.IO) {
+            val trimmedAddr = address.trim()
+            val existing = repository.getContactByAddress(trimmedAddr)
+            if (existing != null) {
+                withContext(Dispatchers.Main) {
+                    _error.value = "Contact with this address already exists"
+                }
+                return@launch
+            }
             val contact = Contact(
-                address = address.trim(),
+                address = trimmedAddr,
                 nickname = nickname.trim(),
                 note = note.trim()
             )
