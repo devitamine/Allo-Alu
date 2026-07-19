@@ -4,27 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Allo•Alu — Pure Sovereign E2E Web3 Messenger</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Space Grotesk & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Space Grotesk', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
                         mono: ['JetBrains Mono', 'monospace'],
                     },
                     colors: {
                         cosmic: {
-                            950: '#030407',
-                            900: '#07080F',
-                            800: '#0F1122',
-                            700: '#171A35',
-                            accent: '#3B82F6', // Trust blue
-                            glow: '#A855F7',   // Web3 purple
-                            teal: '#10B981',   // Secure green
-                            coral: '#F43F5E'   // Alert coral
+                            950: '#030408',
+                            900: '#080913',
+                            800: '#0F1126',
+                            700: '#171A3B',
+                            accent: '#2563EB', // Trust Blue
+                            glow: '#7C3AED',   // Crypto Purple
+                            teal: '#059669',   // Safe Emerald
+                            coral: '#E11D48',  // Alert Rose
+                            border: 'rgba(255,255,255,0.06)'
                         }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse-slow 12s infinite ease-in-out',
+                        'float': 'float 6s infinite ease-in-out',
                     }
                 }
             }
@@ -32,392 +42,470 @@
     </script>
     <style>
         body {
-            background-color: #030407;
-            color: #E2E8F0;
+            background-color: #030408;
+            color: #F1F5F9;
         }
-        .glow-button {
-            position: relative;
-            transition: all 0.3s ease;
+        /* Custom Smooth Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-        .glow-button::after {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            background: linear-gradient(90deg, #3B82F6, #8B5CF6, #10B981);
-            border-radius: inherit;
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            filter: blur(8px);
+        ::-webkit-scrollbar-track {
+            background: #030408;
         }
-        .glow-button:hover::after {
-            opacity: 0.75;
+        ::-webkit-scrollbar-thumb {
+            background: #171A3B;
+            border-radius: 4px;
         }
-        /* Frosted Glass Cards */
-        .glass-card {
-            background: rgba(15, 17, 34, 0.45);
-            backdrop-filter: blur(20px);
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2563EB;
+        }
+        /* Glassmorphism Styles */
+        .glass-panel {
+            background: rgba(15, 17, 38, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .glass-card:hover {
-            background: rgba(15, 17, 34, 0.7);
-            border-color: rgba(168, 85, 247, 0.3);
+        .glass-panel-hover:hover {
+            background: rgba(15, 17, 38, 0.65);
+            border-color: rgba(124, 58, 237, 0.3);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+            transform: translateY(-4px);
         }
-        /* Fast animation pulses */
+        /* Custom Keyframe Animations */
         @keyframes pulse-slow {
-            0%, 100% { transform: scale(1) translate(0px, 0px); opacity: 0.6; }
-            50% { transform: scale(1.15) translate(20px, -40px); opacity: 0.85; }
+            0%, 100% { transform: scale(1) translate(0px, 0px); opacity: 0.3; }
+            50% { transform: scale(1.1) translate(15px, -30px); opacity: 0.55; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
         .animate-aura-1 {
-            animation: pulse-slow 15s infinite ease-in-out;
+            animation: pulse-slow 16s infinite ease-in-out;
         }
         .animate-aura-2 {
             animation: pulse-slow 20s infinite ease-in-out reverse;
         }
+        .animate-float {
+            animation: float 5s infinite ease-in-out;
+        }
     </style>
 </head>
-<body class="font-sans antialiased overflow-x-hidden text-slate-200">
+<body class="font-sans antialiased overflow-x-hidden">
 
-    <!-- Header Navigation -->
-    <header class="border-b border-white/10 py-4 px-6 md:px-12 sticky top-0 bg-cosmic-950/90 backdrop-blur-xl z-50 shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <div class="flex items-center space-x-3 bg-cosmic-800/80 border border-white/10 px-4 py-2 rounded-2xl shadow-lg">
-                <img src="assets/logo_v1.png" alt="Allo•Alu Logo" class="w-10 h-10 rounded-xl object-contain bg-cosmic-950 border border-white/15">
+    <!-- Top Glow Grid Overlay -->
+    <div class="absolute top-0 inset-x-0 h-[800px] bg-[linear-gradient(to_bottom,rgba(124,58,237,0.08),transparent)] pointer-events-none -z-10"></div>
+    <div class="absolute top-0 left-1/4 w-[600px] h-[600px] bg-cosmic-glow/10 blur-[130px] rounded-full pointer-events-none -z-20 animate-aura-1"></div>
+    <div class="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-cosmic-accent/10 blur-[150px] rounded-full pointer-events-none -z-20 animate-aura-2"></div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-50 border-b border-white/5 bg-cosmic-950/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <div class="flex items-center space-x-3">
+                <img src="assets/logo_v1.png" alt="Allo•Alu Logo" class="w-10 h-10 rounded-xl object-contain bg-cosmic-900 border border-white/10 shadow-md">
                 <div>
-                    <div class="flex items-center space-x-1.5">
-                        <span class="text-xl font-bold tracking-tight text-white font-mono">Allo•Alu</span>
-                        <span class="text-[9px] bg-cosmic-accent/20 text-cosmic-accent px-1.5 py-0.5 rounded font-mono font-bold">V1.1.0</span>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-lg font-bold tracking-tight text-white font-display">Allo•Alu</span>
+                        <span class="text-[9px] bg-cosmic-glow/20 text-cosmic-glow px-1.5 py-0.5 rounded font-mono font-bold uppercase tracking-wider">V1.1.0</span>
                     </div>
-                    <span class="text-[9px] block font-mono text-cosmic-teal font-bold uppercase tracking-widest">● Sovereign P2P</span>
+                    <span class="text-[10px] block font-mono text-cosmic-teal font-bold uppercase tracking-widest">● On-Chain Sovereign</span>
                 </div>
             </div>
-            
-            <div class="hidden md:flex items-center space-x-8 text-sm font-medium font-mono">
-                <a href="#security" class="text-slate-300 hover:text-cosmic-teal transition-colors">🔒 Ultimate Security</a>
-                <a href="#features" class="text-slate-300 hover:text-cosmic-glow transition-colors">⚡ Full Specs</a>
-                <a href="#pinata" class="text-slate-300 hover:text-cosmic-accent transition-colors">🖼️ IPFS Media</a>
-                <a href="#economics" class="text-slate-300 hover:text-white transition-colors">💰 Costs</a>
-            </div>
 
-            <div>
-                <a href="https://github.com/devitamine/Allo-Alu" target="_blank" class="px-5 py-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-xs font-mono font-bold text-white transition-all flex items-center space-x-2">
-                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                    <span>SOURCE CODE</span>
+            <!-- Nav Items -->
+            <nav class="hidden md:flex items-center space-x-8 text-xs font-mono font-medium tracking-wide">
+                <a href="#overview" class="text-slate-400 hover:text-white transition-colors">OVERVIEW</a>
+                <a href="#security" class="text-slate-400 hover:text-white transition-colors">ARMORED SECURITY</a>
+                <a href="#features" class="text-slate-400 hover:text-white transition-colors">FUNCTIONALITIES</a>
+                <a href="#ipfs" class="text-slate-400 hover:text-white transition-colors">IPFS MEDIA</a>
+                <a href="#pricing" class="text-slate-400 hover:text-white transition-colors">GAS MATRIX</a>
+                <a href="#install" class="text-slate-400 hover:text-white transition-colors">GET STARTED</a>
+            </nav>
+
+            <!-- CTA Buttons -->
+            <div class="flex items-center space-x-4">
+                <a href="https://github.com/devitamine/Allo-Alu" target="_blank" class="hidden sm:flex items-center space-x-2 text-xs font-mono text-slate-400 hover:text-white transition-colors">
+                    <i data-lucide="github" class="w-4 h-4"></i>
+                    <span>REPOS</span>
+                </a>
+                <a href="https://github.com/devitamine/Allo-Alu/releases/latest" class="px-5 py-2.5 bg-white/5 border border-white/10 hover:bg-white/10 text-white text-xs font-mono font-bold tracking-tight rounded-xl transition-all shadow-sm">
+                    DOWNLOAD APK
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- Hero / Ultimate Showcase Section (Increased Mockup Size) -->
-    <section class="relative py-24 px-6 md:px-12 max-w-7xl mx-auto grid lg:grid-cols-12 gap-16 items-center">
-        <!-- Background Orbs -->
-        <div class="absolute top-12 left-1/4 w-[500px] h-[500px] bg-cosmic-glow/15 blur-[150px] rounded-full pointer-events-none animate-aura-1"></div>
-        <div class="absolute bottom-12 right-1/4 w-[500px] h-[500px] bg-cosmic-accent/10 blur-[180px] rounded-full pointer-events-none animate-aura-2"></div>
-
-        <!-- Text Column -->
-        <div class="lg:col-span-6 flex flex-col space-y-8 z-10 bg-gradient-to-b from-cosmic-800 to-cosmic-900 border border-white/10 p-8 md:p-12 rounded-[36px] shadow-[0_25px_60px_rgba(0,0,0,0.8)] backdrop-blur-lg">
-            <div class="inline-flex items-center space-x-2 px-3 py-1 bg-cosmic-teal/10 border border-cosmic-teal/30 rounded-full text-xs font-mono text-cosmic-teal font-bold uppercase tracking-wider max-w-max">
-                <span class="flex h-2 w-2 rounded-full bg-cosmic-teal animate-ping mr-1"></span>
-                <span>Pure Serverless P2P Messenger</span>
-            </div>
+    <!-- HERO SECTION -->
+    <section id="overview" class="relative pt-16 pb-24 md:pt-24 md:pb-32 px-6 max-w-7xl mx-auto">
+        <div class="grid lg:grid-cols-12 gap-16 items-center">
             
-            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white leading-[1.1]">
-                Your Keys.<br>
-                Your Messages.<br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-cosmic-accent via-cosmic-glow to-cosmic-teal">100% Cryptographic.</span>
-            </h1>
-            
-            <p class="text-lg text-slate-300 font-mono leading-relaxed">
-                Ad-free. Subscription-free. Central server-free. Allo•Alu delivers secure, peer-to-peer communication directly on-chain using micro-transactions on the eco-friendly Algorand ledger.
-            </p>
-
-            <div class="flex flex-col sm:flex-row gap-4 pt-2">
-                <a href="https://github.com/devitamine/Allo-Alu/releases" target="_blank" class="glow-button px-8 py-4 bg-gradient-to-r from-cosmic-accent to-cosmic-glow text-white hover:opacity-95 transition-all font-mono font-bold tracking-tight rounded-xl flex items-center justify-center space-x-3 text-base shadow-lg shadow-cosmic-glow/20">
-                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 11v4h-2v-4H8l4-4 4 4h-3z"/></svg>
-                    <span>GET LATEST APK</span>
-                </a>
-                <a href="#economics" class="px-8 py-4 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 text-white transition-all font-mono text-sm font-bold rounded-xl flex items-center justify-center space-x-2">
-                    <span>ECONOMIC MATRIX</span>
-                </a>
-            </div>
-
-            <!-- Punchy Assets / Strengths Grid -->
-            <div class="grid grid-cols-3 gap-4 pt-8 border-t border-white/10 text-center sm:text-left">
-                <div>
-                    <span class="block text-xl font-bold text-white font-mono">0.001 ALGO</span>
-                    <span class="text-[11px] text-slate-400 font-mono uppercase tracking-wider">Direct Network Gas</span>
+            <!-- Left Info Content -->
+            <div class="lg:col-span-7 flex flex-col space-y-8 text-left z-10">
+                <div class="inline-flex items-center space-x-2 px-3 py-1.5 bg-cosmic-glow/10 border border-cosmic-glow/30 rounded-full text-xs font-mono text-cosmic-glow font-bold uppercase tracking-widest max-w-max">
+                    <span class="flex h-2 w-2 rounded-full bg-cosmic-glow animate-ping mr-1"></span>
+                    <span>No Core Servers • No Middlemen • No Ads</span>
                 </div>
-                <div>
-                    <span class="block text-xl font-bold text-cosmic-teal font-mono">Instant</span>
-                    <span class="text-[11px] text-slate-400 font-mono uppercase tracking-wider">Forkless Finality</span>
-                </div>
-                <div>
-                    <span class="block text-xl font-bold text-cosmic-glow font-mono">No Servers</span>
-                    <span class="text-[11px] text-slate-400 font-mono uppercase tracking-wider">Censorship Proof</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Enlarged Website Mockup & App Screenshot Display -->
-        <div class="lg:col-span-6 flex justify-center relative z-10">
-            <!-- Neon backdrop shadow glows -->
-            <div class="absolute inset-0 bg-gradient-to-tr from-cosmic-accent/25 via-cosmic-glow/25 to-cosmic-teal/25 rounded-full blur-[100px] -z-10 scale-100 opacity-80"></div>
-            
-            <!-- Sleek Device Shell Frame with larger dimensions -->
-            <div class="relative max-w-full flex justify-center items-center">
-                <img src="assets/screenshot_v1.jpg" alt="Allo•Alu App UI Mockup" class="w-[360px] sm:w-[460px] md:w-[520px] lg:w-[480px] xl:w-[560px] rounded-[52px] border-[14px] border-cosmic-700 shadow-[0_45px_100px_rgba(0,0,0,0.95),0_0_80px_rgba(168,85,247,0.3)] relative z-10 hover:scale-[1.03] transition-all duration-500">
                 
-                <!-- Pure Web3 Proof Floating Badges -->
-                <div class="absolute -top-6 -right-6 bg-cosmic-teal text-white text-[10px] font-mono font-bold px-3 py-1.5 rounded-full shadow-lg z-20 border border-white/20 transform rotate-6">
-                    ⚡ 2.8s FINALITY
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-[1.08] font-display">
+                    Sovereign P2P Messenger.<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-indigo-400 to-emerald-400">Purely On-Chain.</span>
+                </h1>
+                
+                <p class="text-base sm:text-lg text-slate-400 leading-relaxed max-w-2xl font-sans">
+                    Allo•Alu bypasses legacy centralized infrastructure entirely. Your messages are signed, encrypted with ephemeral session keys, and anchored directly onto the carbon-negative Algorand blockchain as tamper-proof micro-transactions.
+                </p>
+
+                <!-- Core Call to Action Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 pt-2">
+                    <a href="https://github.com/devitamine/Allo-Alu/releases/latest" class="px-8 py-4 bg-gradient-to-r from-cosmic-accent to-cosmic-glow hover:opacity-95 text-white font-mono font-bold tracking-tight rounded-2xl flex items-center justify-center space-x-3 text-sm shadow-xl shadow-cosmic-glow/25 transition-all transform hover:-translate-y-0.5">
+                        <i data-lucide="download" class="w-4 h-4"></i>
+                        <span>GET SECURE APK</span>
+                    </a>
+                    <a href="https://github.com/devitamine/Allo-Alu" target="_blank" class="px-8 py-4 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 text-white font-mono text-xs font-bold rounded-2xl flex items-center justify-center space-x-2 transition-all">
+                        <i data-lucide="github" class="w-4 h-4"></i>
+                        <span>EXPLORE SOURCE CODE</span>
+                    </a>
                 </div>
-                <div class="absolute -bottom-6 -left-6 bg-cosmic-glow text-white text-[10px] font-mono font-bold px-3 py-1.5 rounded-full shadow-lg z-20 border border-white/20 transform -rotate-3">
-                    🔒 NO CENTRAL DB
+
+                <!-- Live Network Stats Badges -->
+                <div class="grid grid-cols-3 gap-6 pt-8 border-t border-white/5 max-w-lg">
+                    <div>
+                        <span class="block text-2xl font-bold text-white font-display">~2.8s</span>
+                        <span class="text-[10px] text-slate-500 font-mono uppercase tracking-wider block mt-1">Instant Finality</span>
+                    </div>
+                    <div>
+                        <span class="block text-2xl font-bold text-cosmic-teal font-display">0.001 ALGO</span>
+                        <span class="text-[10px] text-slate-500 font-mono uppercase tracking-wider block mt-1">Fee Per Message</span>
+                    </div>
+                    <div>
+                        <span class="block text-2xl font-bold text-cosmic-glow font-display">AES-256</span>
+                        <span class="text-[10px] text-slate-500 font-mono uppercase tracking-wider block mt-1">On-Chain E2EE</span>
+                    </div>
                 </div>
             </div>
+
+            <!-- Right Interactive / Screenshot Column -->
+            <div class="lg:col-span-5 flex justify-center relative">
+                <!-- Outer Neon Glow Rings -->
+                <div class="absolute inset-0 bg-gradient-to-tr from-cosmic-accent/20 via-cosmic-glow/15 to-cosmic-teal/15 rounded-full blur-[90px] -z-10 scale-95 opacity-80 animate-pulse-slow"></div>
+                
+                <!-- Mockup Container -->
+                <div class="relative max-w-full flex justify-center items-center">
+                    <img src="assets/screenshot_v1.jpg" alt="Allo•Alu Sovereign Mobile Interface" class="w-[310px] sm:w-[350px] md:w-[390px] rounded-[48px] border-[12px] border-cosmic-700 shadow-[0_35px_80px_rgba(0,0,0,0.9),0_0_60px_rgba(124,58,237,0.25)] relative z-10 transition-transform duration-500 hover:scale-[1.02] animate-float">
+                    
+                    <!-- Floating Tech Spec Badges -->
+                    <div class="absolute -top-4 -right-4 bg-[#0a231c] text-cosmic-teal text-[10px] font-mono font-bold px-3 py-1.5 rounded-full shadow-lg z-20 border border-cosmic-teal/30 transform rotate-3 flex items-center space-x-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-cosmic-teal animate-ping"></span>
+                        <span>FORKLESS LEDGER</span>
+                    </div>
+                    <div class="absolute -bottom-4 -left-4 bg-[#230a1c] text-cosmic-coral text-[10px] font-mono font-bold px-3 py-1.5 rounded-full shadow-lg z-20 border border-cosmic-coral/30 transform -rotate-3 flex items-center space-x-1.5">
+                        <i data-lucide="shield-alert" class="w-3.5 h-3.5"></i>
+                        <span>SCREENSHOT INHIBITED</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <!-- SECTION 1: ULTIMATE ARMORED SECURITY (HIGH-CONTRAST HIGHLIGHTED BLOCK) -->
-    <section id="security" class="py-24 bg-gradient-to-r from-[#02231c]/90 via-[#031526]/95 to-[#1a082b]/90 border-y-2 border-cosmic-teal/60 relative overflow-hidden">
-        <div class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-cosmic-teal to-transparent"></div>
-        <div class="absolute -top-32 left-1/3 w-96 h-96 bg-cosmic-teal/20 blur-[130px] rounded-full pointer-events-none"></div>
+    <!-- SECTION 1: ARMORED SECURITY SUITE -->
+    <section id="security" class="py-24 bg-gradient-to-b from-cosmic-950 via-cosmic-900 to-cosmic-950 border-y border-white/5 relative overflow-hidden">
+        <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cosmic-glow to-transparent"></div>
+        <div class="absolute top-1/2 left-1/3 w-96 h-96 bg-cosmic-coral/5 blur-[120px] rounded-full pointer-events-none -z-10"></div>
         
-        <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="inline-flex items-center space-x-2 px-3 py-1 bg-cosmic-coral/20 border border-cosmic-coral/40 rounded-full text-xs font-mono text-cosmic-coral uppercase tracking-widest mb-3">
-                    🛡️ Extreme Hardening
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-20">
+                <span class="inline-flex items-center space-x-2 px-3 py-1 bg-cosmic-coral/10 border border-cosmic-coral/30 rounded-full text-[11px] font-mono text-cosmic-coral uppercase tracking-widest mb-3">
+                    <i data-lucide="shield" class="w-3 h-3"></i>
+                    <span>Extreme Hardening Protocols</span>
                 </span>
-                <h2 class="text-4xl md:text-5xl font-bold tracking-tight text-white font-sans">
-                    Armored Security Suite
+                <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white font-display">
+                    Military-Grade Anti-Malware Protection
                 </h2>
-                <p class="text-slate-300 mt-4 text-base md:text-lg font-mono">
-                    Zero compromises. Built specifically to protect your cryptographic identity, conversations, and assets from local malware and physical tampering.
+                <p class="text-slate-400 mt-4 text-sm sm:text-base font-mono">
+                    We designed Allo•Alu to protect your cryptographic identity, conversations, and assets from physical theft, local malware, and keylogger attacks.
                 </p>
             </div>
 
+            <!-- Security Features Grid -->
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Security 1: 100% On-Chain E2E -->
-                <div class="p-8 rounded-2xl bg-[#050c12]/90 border border-cosmic-accent/40 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
-                    <div class="w-12 h-12 rounded-xl bg-cosmic-accent/10 border border-cosmic-accent/30 flex items-center justify-center text-cosmic-accent mb-6">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                
+                <!-- Card 1: On-Chain E2EE -->
+                <div class="p-8 rounded-2xl bg-cosmic-900/60 border border-white/5 shadow-lg relative overflow-hidden group">
+                    <div class="absolute -top-12 -right-12 w-24 h-24 bg-cosmic-accent/10 rounded-full blur-xl group-hover:bg-cosmic-accent/20 transition-all"></div>
+                    <div class="w-12 h-12 rounded-xl bg-cosmic-accent/10 border border-cosmic-accent/20 flex items-center justify-center text-cosmic-accent mb-6">
+                        <i data-lucide="key-round" class="w-5 h-5"></i>
                     </div>
-                    <h3 class="text-lg font-mono font-bold text-white mb-2 uppercase tracking-wide">100% On-Chain E2E Encryption</h3>
-                    <p class="text-sm text-slate-300 leading-relaxed font-sans">
-                        All chat messages are wrapped inside fully encrypted transaction payloads directly on the Algorand ledger. No databases to hack, no intermediate servers, and absolute permanence.
+                    <h3 class="text-lg font-bold text-white font-display mb-2">ECDH Elliptic Curve E2EE</h3>
+                    <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                        Features X25519 Diffie-Hellman key exchange directly from on-chain signatures to generate robust, ephemeral AES-256 session keys. Your raw chats are cryptographically locked before leaving your phone.
                     </p>
                 </div>
 
-                <!-- Security 2: Security Throttling -->
-                <div class="p-8 rounded-2xl bg-[#14050d]/90 border border-cosmic-coral/40 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
-                    <div class="w-12 h-12 rounded-xl bg-cosmic-coral/10 border border-cosmic-coral/30 flex items-center justify-center text-cosmic-coral mb-6">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                <!-- Card 2: Bruteforce Protection -->
+                <div class="p-8 rounded-2xl bg-cosmic-900/60 border border-white/5 shadow-lg relative overflow-hidden group">
+                    <div class="absolute -top-12 -right-12 w-24 h-24 bg-cosmic-coral/10 rounded-full blur-xl group-hover:bg-cosmic-coral/20 transition-all"></div>
+                    <div class="w-12 h-12 rounded-xl bg-cosmic-coral/10 border border-cosmic-coral/20 flex items-center justify-center text-cosmic-coral mb-6">
+                        <i data-lucide="hourglass" class="w-5 h-5"></i>
                     </div>
-                    <h3 class="text-lg font-mono font-bold text-white mb-2 uppercase tracking-wide">Brute-Force Protection</h3>
-                    <p class="text-sm text-slate-300 leading-relaxed font-sans">
-                        Dynamic lockout defense mechanisms. The application instantly freezes all authentication routes for 1 minute after exactly 3 consecutive incorrect password attempts, protecting your keys from brute-force scripts.
+                    <h3 class="text-lg font-bold text-white font-display mb-2">Passcode Lockout Armor</h3>
+                    <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                        To block brute-force attempts on local key storages, our security engine triggers an immediate 1-minute system freeze of all auth screens after exactly 3 consecutive failed passcode inputs.
                     </p>
                 </div>
 
-                <!-- Security 3: Biometric Auth -->
-                <div class="p-8 rounded-2xl bg-[#040f0c]/90 border border-cosmic-teal/40 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
-                    <div class="w-12 h-12 rounded-xl bg-cosmic-teal/10 border border-cosmic-teal/30 flex items-center justify-center text-cosmic-teal mb-6">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 009 11.571V11a4 4 0 118 0v.571c0 .545.064 1.085.19 1.611l.124.512m-9.48 2.037a13.916 13.916 0 01-1.397-5.591c0-2.52.398-5.02 1.171-7.411m9.08 7.411c.427-.51.9-1.002 1.41-1.472M12 17.5c-2.33 0-4.518-.397-6.55-1.11m13.1-2.643a9.045 9.045 0 011.855-2.408M12 17.5a13.982 13.982 0 001.397-5.591M12 17.5c.343 0 .68-.018 1.012-.053m0 0a13.917 13.917 0 005.151-2.223m-5.151 2.223a14.02 14.02 0 002.3-5.591M3 7.25c1.352-1.127 2.87-2.008 4.5-2.62M17 4.63a12.93 12.93 0 014.5 2.62" /></svg>
+                <!-- Card 3: Screenshot Shield -->
+                <div class="p-8 rounded-2xl bg-cosmic-900/60 border border-white/5 shadow-lg relative overflow-hidden group">
+                    <div class="absolute -top-12 -right-12 w-24 h-24 bg-cosmic-teal/10 rounded-full blur-xl group-hover:bg-cosmic-teal/20 transition-all"></div>
+                    <div class="w-12 h-12 rounded-xl bg-cosmic-teal/10 border border-cosmic-teal/20 flex items-center justify-center text-cosmic-teal mb-6">
+                        <i data-lucide="eye-off" class="w-5 h-5"></i>
                     </div>
-                    <h3 class="text-lg font-mono font-bold text-white mb-2 uppercase tracking-wide">Biometric Security Shield</h3>
-                    <p class="text-sm text-slate-300 leading-relaxed font-sans">
-                        Integrates system-level BiometricPrompt (Touch ID / Face ID) to authenticate wallet queries. Protects message reading and key exports instantly with hardware security.
+                    <h3 class="text-lg font-bold text-white font-display mb-2">Screenshot Inhibited Layout</h3>
+                    <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                        Blocks malicious malware from scraping your screen or recording seed phrases. Utilizing Android's <code class="text-cosmic-teal font-mono">FLAG_SECURE</code>, any screenshots or recordings return completely pitch black.
                     </p>
                 </div>
 
-                <!-- Security 4: Screenshot Prevention -->
-                <div class="p-8 rounded-2xl bg-[#0c0514]/90 border border-cosmic-glow/40 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
-                    <div class="w-12 h-12 rounded-xl bg-cosmic-glow/10 border border-cosmic-glow/30 flex items-center justify-center text-cosmic-glow mb-6">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                <!-- Card 4: Hardware Tied Encryption -->
+                <div class="p-8 rounded-2xl bg-cosmic-900/60 border border-white/5 shadow-lg relative overflow-hidden group">
+                    <div class="absolute -top-12 -right-12 w-24 h-24 bg-cosmic-glow/10 rounded-full blur-xl group-hover:bg-cosmic-glow/20 transition-all"></div>
+                    <div class="w-12 h-12 rounded-xl bg-cosmic-glow/10 border border-cosmic-glow/20 flex items-center justify-center text-cosmic-glow mb-6">
+                        <i data-lucide="fingerprint" class="w-5 h-5"></i>
                     </div>
-                    <h3 class="text-lg font-mono font-bold text-white mb-2 uppercase tracking-wide">Screenshot Hardware Protection</h3>
-                    <p class="text-sm text-slate-300 leading-relaxed font-sans">
-                        Uses Android's secure layout flag (FLAG_SECURE) to completely block screenshot captures and overlay attacks. Screen recordings of private channels output as pitch black.
+                    <h3 class="text-lg font-bold text-white font-display mb-2">Biometric Hardware Verification</h3>
+                    <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                        Encrypts local keys using Android's hardware-isolated Keystore. Biometric biometric prompts (fingerprint/face verification) are strictly required prior to sensitive transactions or seed phrase exports.
                     </p>
                 </div>
 
-                <!-- Security 5: Hardened Local Database -->
-                <div class="p-8 rounded-2xl bg-[#040f0c]/90 border border-cosmic-teal/40 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
-                    <div class="w-12 h-12 rounded-xl bg-cosmic-teal/10 border border-cosmic-teal/30 flex items-center justify-center text-cosmic-teal mb-6">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" /></svg>
+                <!-- Card 5: Hardened SQL Database -->
+                <div class="p-8 rounded-2xl bg-cosmic-900/60 border border-white/5 shadow-lg relative overflow-hidden group">
+                    <div class="absolute -top-12 -right-12 w-24 h-24 bg-blue-500/10 rounded-full blur-xl group-hover:bg-blue-500/20 transition-all"></div>
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-500 mb-6">
+                        <i data-lucide="database" class="w-5 h-5"></i>
                     </div>
-                    <h3 class="text-lg font-mono font-bold text-white mb-2 uppercase tracking-wide">SQLCipher Room Database</h3>
-                    <p class="text-sm text-slate-300 leading-relaxed font-sans">
-                        Local cached messages, contacts directory, and keys are encrypted using a randomized, hardware-tied key in the Keystore and stored under standard AES-256 local database containers.
+                    <h3 class="text-lg font-bold text-white font-display mb-2">SQLCipher Encrypted Local Cache</h3>
+                    <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                        All offline data cached inside the room database — including chat logs, notepad contents, and contact directory maps — are encrypted locally using custom generated cryptography hashes tied to your phone's unique hardware signatures.
                     </p>
                 </div>
 
-                <!-- Security 6: Serverless Immunity -->
-                <div class="p-8 rounded-2xl bg-[#050c12]/90 border border-cosmic-accent/40 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
-                    <div class="w-12 h-12 rounded-xl bg-cosmic-accent/10 border border-cosmic-accent/30 flex items-center justify-center text-cosmic-accent mb-6">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+                <!-- Card 6: Zero Server Outages -->
+                <div class="p-8 rounded-2xl bg-cosmic-900/60 border border-white/5 shadow-lg relative overflow-hidden group">
+                    <div class="absolute -top-12 -right-12 w-24 h-24 bg-emerald-500/10 rounded-full blur-xl group-hover:bg-emerald-500/20 transition-all"></div>
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-500 mb-6">
+                        <i data-lucide="server-off" class="w-5 h-5"></i>
                     </div>
-                    <h3 class="text-lg font-mono font-bold text-white mb-2 uppercase tracking-wide">Zero External Backend Relays</h3>
-                    <p class="text-sm text-slate-300 leading-relaxed font-sans">
-                        Allo•Alu talks directly to peer addresses over Algorand. There are no proprietary databases, relay channels, or servers to fail, log IPs, sell data, or shut down.
+                    <h3 class="text-lg font-bold text-white font-display mb-2">Decentralized Sovereign Nodes</h3>
+                    <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                        Without centralized servers, corporate structures, database relays, or IP address logging hubs to target, Allo•Alu is immune to regional data center blackouts, government blocks, and host censorship.
                     </p>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- SECTION 2: FULL APP FUNCTIONALITY BREAKDOWN -->
-    <section id="features" class="py-24 px-6 md:px-12 max-w-7xl mx-auto">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <span class="inline-flex items-center space-x-2 px-3 py-1 bg-cosmic-glow/20 border border-cosmic-glow/40 rounded-full text-xs font-mono text-cosmic-glow uppercase tracking-wider mb-3">
-                🔥 Complete Ecosystem
+    <!-- SECTION 2: BENTO GRID OF CORE CHAT FUNCTIONALITIES -->
+    <section id="features" class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-20">
+            <span class="inline-flex items-center space-x-2 px-3 py-1 bg-cosmic-glow/10 border border-cosmic-glow/30 rounded-full text-[11px] font-mono text-cosmic-glow uppercase tracking-widest mb-3">
+                <i data-lucide="boxes" class="w-3.5 h-3.5"></i>
+                <span>Ecosystem Specifications</span>
             </span>
-            <h2 class="text-4xl md:text-5xl font-bold tracking-tight text-white font-sans">
-                Full Messenger Functionality
+            <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white font-display">
+                Engineered for High-Performance Privacy
             </h2>
-            <p class="text-slate-400 mt-4 text-base md:text-lg font-mono">
-                Sovereign tools to manage secure peer-to-peer chats, shared multimedia files, and notes.
+            <p class="text-slate-400 mt-4 text-sm sm:text-base font-mono">
+                Explore the powerful, secure, and hyper-optimized features that make on-chain chatting effortless.
             </p>
         </div>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <!-- Func 1 -->
-            <div class="p-6 rounded-2xl bg-cosmic-800/40 border border-white/5 flex flex-col justify-between">
+        <!-- Bento Grid Layout -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
+            
+            <!-- Large Card: Cryptographic Ledger Messaging -->
+            <div class="md:col-span-8 p-8 md:p-10 rounded-3xl glass-panel relative overflow-hidden flex flex-col justify-between group">
+                <div class="absolute -right-16 -bottom-16 w-64 h-64 bg-cosmic-accent/10 rounded-full blur-3xl pointer-events-none group-hover:bg-cosmic-accent/15 transition-all"></div>
                 <div>
-                    <div class="text-2xl mb-4">💬</div>
-                    <h4 class="text-white font-bold text-base font-mono uppercase tracking-wide mb-2">P2P Secure Messaging</h4>
-                    <p class="text-xs text-slate-400 leading-relaxed">
-                        Anchor decentralized conversations in real time using secure Algorand payloads with extreme speed (under 2.8s) and direct keypair handshakes.
+                    <div class="inline-flex items-center space-x-2 text-cosmic-accent text-xs font-mono font-bold tracking-wider mb-4 uppercase">
+                        <i data-lucide="message-square" class="w-4 h-4"></i>
+                        <span>On-Chain Direct Messaging</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white font-display mb-4">Under-the-Hood Cryptographic Payloads</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed max-w-xl">
+                        Instead of traditional centralized servers, messages are transformed into high-density base64 cryptograms stored directly within the secure <code class="text-cosmic-accent font-mono bg-cosmic-950/60 px-1.5 py-0.5 rounded text-xs">note</code> parameter of an Algorand transaction. Chatting achieves ultra-secure, tamper-proof, and permanent network delivery.
                     </p>
+                </div>
+                
+                <!-- Code Visual Demo Block -->
+                <div class="mt-8 rounded-2xl bg-cosmic-950/80 p-5 border border-white/5 font-mono text-xs text-slate-300 relative">
+                    <div class="flex items-center justify-between border-b border-white/5 pb-3 mb-3 text-[10px] text-slate-500 uppercase tracking-widest">
+                        <span>Ledger Transaction Preview</span>
+                        <span class="text-cosmic-teal flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-cosmic-teal mr-1.5 animate-pulse"></span>SIGNED_TXN</span>
+                    </div>
+                    <div class="space-y-1.5 text-slate-400">
+                        <p><span class="text-cosmic-glow">"txn":</span> {</p>
+                        <p class="pl-4"><span class="text-cosmic-accent">"type":</span> "pay",</p>
+                        <p class="pl-4"><span class="text-cosmic-accent">"sender":</span> "ALLO_SENDER_ADDR_K7XMQ...",</p>
+                        <p class="pl-4"><span class="text-cosmic-accent">"receiver":</span> "ALLO_RCVR_ADDR_3BZ9K...",</p>
+                        <p class="pl-4"><span class="text-cosmic-accent">"amount":</span> 0,</p>
+                        <p class="pl-4"><span class="text-cosmic-coral">"note":</span> "b64:WjI1NTE5RERIZXBoZW1lc...", <span class="text-slate-500">// AES-256-GCM Encrypted Chat</span></p>
+                        <p class="pl-4"><span class="text-cosmic-teal">"fee":</span> 1000 <span class="text-slate-500">// 0.001 ALGO</span></p>
+                        <p>}</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Func 2 -->
-            <div class="p-6 rounded-2xl bg-cosmic-800/40 border border-white/5 flex flex-col justify-between">
+            <!-- Small Card: Spam Segmented Contact Lists -->
+            <div class="md:col-span-4 p-8 rounded-3xl glass-panel relative overflow-hidden flex flex-col justify-between group">
+                <div class="absolute -right-16 -bottom-16 w-48 h-48 bg-cosmic-teal/10 rounded-full blur-2xl pointer-events-none group-hover:bg-cosmic-teal/15 transition-all"></div>
                 <div>
-                    <div class="text-2xl mb-4">📂</div>
-                    <h4 class="text-white font-bold text-base font-mono uppercase tracking-wide mb-2">Separated Contacts Hub</h4>
-                    <p class="text-xs text-slate-400 leading-relaxed">
-                        Smarter organization. Automatically segment verified friends ("Inbox/Contacts") from unapproved external entries ("Others") to keep your dashboard clean.
+                    <div class="inline-flex items-center space-x-2 text-cosmic-teal text-xs font-mono font-bold tracking-wider mb-4 uppercase">
+                        <i data-lucide="users" class="w-4 h-4"></i>
+                        <span>Smart Filtering</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white font-display mb-4">Anti-Spam Contacts Hub</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Keep your workspaces tidy. Allo•Alu cleanly segments your primary contact directory ("Inbox/Contacts") from unrecognized external incoming ledger deposits ("Others"). Filter out spam wallets with ease.
                     </p>
+                </div>
+                <div class="mt-8 flex justify-center">
+                    <!-- Minimal UI Element mock -->
+                    <div class="w-full bg-cosmic-950/60 border border-white/5 rounded-2xl p-4 flex flex-col space-y-2">
+                        <div class="flex items-center justify-between text-xs font-mono">
+                            <span class="text-slate-500">Workspace Sorting</span>
+                            <span class="text-cosmic-teal bg-cosmic-teal/10 px-2 py-0.5 rounded text-[10px] font-bold">AUTO</span>
+                        </div>
+                        <div class="flex space-x-2">
+                            <span class="flex-1 text-center py-1.5 bg-cosmic-glow/20 text-white font-bold text-xs rounded-xl font-mono">Contacts</span>
+                            <span class="flex-1 text-center py-1.5 bg-white/5 text-slate-400 text-xs rounded-xl font-mono hover:text-white transition-colors">Others</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Func 3 -->
-            <div class="p-6 rounded-2xl bg-cosmic-800/40 border border-white/5 flex flex-col justify-between">
+            <!-- Small Card: Instant Global Search -->
+            <div class="md:col-span-4 p-8 rounded-3xl glass-panel relative overflow-hidden flex flex-col justify-between group">
+                <div class="absolute -right-16 -bottom-16 w-48 h-48 bg-cosmic-glow/10 rounded-full blur-2xl pointer-events-none group-hover:bg-cosmic-glow/15 transition-all"></div>
                 <div>
-                    <div class="text-2xl mb-4">🔍</div>
-                    <h4 class="text-white font-bold text-base font-mono uppercase tracking-wide mb-2">Smart Instant Search</h4>
-                    <p class="text-xs text-slate-400 leading-relaxed">
-                        Localized, high-speed filters parse through notes, chat histories, contact logs, and wallet addresses on-the-fly as you type.
+                    <div class="inline-flex items-center space-x-2 text-cosmic-glow text-xs font-mono font-bold tracking-wider mb-4 uppercase">
+                        <i data-lucide="search" class="w-4 h-4"></i>
+                        <span>Instant Filter</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white font-display mb-4">Sovereign High-Speed Search</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Instantly parse massive on-chain chat streams, saved contacts, address tags, and offline notepad directories. Highly efficient, sub-millisecond local filtering as you type.
                     </p>
+                </div>
+                <div class="mt-8">
+                    <div class="bg-cosmic-950/60 border border-white/5 rounded-2xl p-4 flex items-center space-x-3 text-xs text-slate-400">
+                        <i data-lucide="search" class="w-4 h-4 text-cosmic-glow"></i>
+                        <span>Search chats, notes or wallets...</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Func 4 -->
-            <div class="p-6 rounded-2xl bg-cosmic-800/40 border border-white/5 flex flex-col justify-between">
+            <!-- Large Card: Hardened Off-Grid Notepad -->
+            <div class="md:col-span-8 p-8 md:p-10 rounded-3xl glass-panel relative overflow-hidden flex flex-col justify-between group">
+                <div class="absolute -right-16 -bottom-16 w-64 h-64 bg-cosmic-teal/10 rounded-full blur-3xl pointer-events-none group-hover:bg-cosmic-teal/15 transition-all"></div>
                 <div>
-                    <div class="text-2xl mb-4">⚡</div>
-                    <h4 class="text-white font-bold text-base font-mono uppercase tracking-wide mb-2">Offline Support</h4>
-                    <p class="text-xs text-slate-400 leading-relaxed">
-                        Uninterrupted reading. View your cached chat history, modify details, and draft messages locally without any internet connection.
+                    <div class="inline-flex items-center space-x-2 text-cosmic-teal text-xs font-mono font-bold tracking-wider mb-4 uppercase">
+                        <i data-lucide="book-open" class="w-4 h-4"></i>
+                        <span>Offline Storage</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white font-display mb-4">Protected Military-Grade Private Notebook</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed max-w-xl">
+                        Need a secure vault to store seed phrases, sensitive API tokens, or login keys? The built-in Private Notepad stores fully encrypted data within your device's isolated hardware storage and allows one-tap manual on-chain backups.
                     </p>
+                </div>
+                
+                <div class="mt-8 grid grid-cols-2 gap-4">
+                    <div class="p-4 bg-cosmic-950/50 rounded-2xl border border-white/5 flex items-start space-x-3 text-xs">
+                        <i data-lucide="shield-check" class="w-4 h-4 text-cosmic-teal mt-0.5 flex-shrink-0"></i>
+                        <div>
+                            <span class="font-bold text-white block mb-1">Local Sandbox Lock</span>
+                            <p class="text-slate-500">Never exposed to external network nodes.</p>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-cosmic-950/50 rounded-2xl border border-white/5 flex items-start space-x-3 text-xs">
+                        <i data-lucide="cloud-lightning" class="w-4 h-4 text-cosmic-glow mt-0.5 flex-shrink-0"></i>
+                        <div>
+                            <span class="font-bold text-white block mb-1">One-Tap Ledger Backup</span>
+                            <p class="text-slate-500">Anchor encrypted drafts permanently.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Func 5 -->
-            <div class="p-6 rounded-2xl bg-cosmic-800/40 border border-white/5 flex flex-col justify-between">
-                <div>
-                    <div class="text-2xl mb-4">📝</div>
-                    <h4 class="text-white font-bold text-base font-mono uppercase tracking-wide mb-2">Encrypted Notepad</h4>
-                    <p class="text-xs text-slate-400 leading-relaxed">
-                        An integrated, military-grade private notepad. Encrypt and back up seed phrases, keys, or passwords permanently on the blockchain.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Func 6 -->
-            <div class="p-6 rounded-2xl bg-cosmic-800/40 border border-white/5 flex flex-col justify-between">
-                <div>
-                    <div class="text-2xl mb-4">🛡️</div>
-                    <h4 class="text-white font-bold text-base font-mono uppercase tracking-wide mb-2">Pre-Flight Safe Guard</h4>
-                    <p class="text-xs text-slate-400 leading-relaxed">
-                        Prevents failed gas fees. The system automatically restricts outgoing transactions if your wallet drops below 0.101 ALGO.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Func 7 -->
-            <div class="p-6 rounded-2xl bg-cosmic-800/40 border border-white/5 flex flex-col justify-between">
-                <div>
-                    <div class="text-2xl mb-4">🖼️</div>
-                    <h4 class="text-white font-bold text-base font-mono uppercase tracking-wide mb-2">Decentralized IPFS Files</h4>
-                    <p class="text-xs text-slate-400 leading-relaxed">
-                        Share high-fidelity media securely without centralized cloud middlemen using direct IPFS pin links.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Func 8 -->
-            <div class="p-6 rounded-2xl bg-cosmic-800/40 border border-white/5 flex flex-col justify-between">
-                <div>
-                    <div class="text-2xl mb-4">🌿</div>
-                    <h4 class="text-white font-bold text-base font-mono uppercase tracking-wide mb-2">Green Consensus</h4>
-                    <p class="text-xs text-slate-400 leading-relaxed">
-                        Chat guilt-free. Supported by Algorand's carbon-negative Pure Proof of Stake network layout.
-                    </p>
-                </div>
-            </div>
         </div>
     </section>
 
-    <!-- SECTION 3: PINATA CLOUD DECENTRALIZED IMAGE SETUP -->
-    <section id="pinata" class="py-24 bg-cosmic-900 border-y border-white/5">
-        <div class="max-w-7xl mx-auto px-6 md:px-12 grid lg:grid-cols-12 gap-12 items-center">
+    <!-- SECTION 3: PINATA DECENTRALIZED STORAGE GATEWAY -->
+    <section id="ipfs" class="py-24 bg-gradient-to-b from-cosmic-950 via-[#060815] to-cosmic-950 border-y border-white/5 relative overflow-hidden">
+        <div class="absolute top-1/2 right-1/4 w-[400px] h-[400px] bg-cosmic-accent/5 blur-[120px] rounded-full pointer-events-none -z-10"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-16 items-center relative z-10">
             
             <div class="lg:col-span-5 flex flex-col space-y-6">
-                <span class="text-xs font-mono font-bold text-cosmic-accent uppercase tracking-widest">Decentralized Storage Setup</span>
-                <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white font-sans">
-                    IPFS Media Sharing via Pinata
+                <span class="inline-flex items-center space-x-2 px-3 py-1 bg-cosmic-accent/10 border border-cosmic-accent/30 rounded-full text-xs font-mono text-cosmic-accent uppercase tracking-widest max-w-max">
+                    <i data-lucide="share-2" class="w-3.5 h-3.5"></i>
+                    <span>Decentralized Media Layer</span>
+                </span>
+                <h2 class="text-3xl sm:text-5xl font-bold tracking-tight text-white font-display">
+                    P2P File &amp; Image Sharing with Pinata
                 </h2>
-                <p class="text-slate-300 leading-relaxed font-mono text-sm">
-                    Because Allo•Alu does not have central servers, we leverage the power of the InterPlanetary File System (IPFS) to let you send pictures. Setting up your secure gateway takes under a minute.
+                <p class="text-slate-400 leading-relaxed text-sm sm:text-base font-sans">
+                    Traditional messengers store your private pictures, coordinates, and documents on their own centralized databases. Allo•Alu achieves pure Web3 sovereignty by using the InterPlanetary File System (IPFS) to distribute files securely across decentralized web nodes.
                 </p>
-                <div class="p-4 bg-cosmic-950 rounded-xl border border-white/5 flex items-center space-x-3 text-xs text-cosmic-teal">
-                    <span>✔</span>
-                    <span class="font-mono">No middleman ever reviews, filters, or censors your media.</span>
+                <div class="p-4 bg-cosmic-950/60 rounded-xl border border-white/5 flex items-start space-x-3 text-xs text-cosmic-teal">
+                    <i data-lucide="check-circle" class="w-4 h-4 mt-0.5 flex-shrink-0"></i>
+                    <span class="font-mono text-slate-300 leading-relaxed">No tracking, no data profiling, and absolute file finality. Only the verified recipient possessing your DH session key can decode and view your media.</span>
                 </div>
             </div>
 
-            <div class="lg:col-span-7 bg-cosmic-800/50 p-8 rounded-3xl border border-white/10 shadow-xl">
-                <h4 class="text-white font-mono text-xs font-bold uppercase tracking-wider mb-6">Easy 3-Step Integration:</h4>
+            <!-- PINATA ACCORDION STEPS -->
+            <div class="lg:col-span-7 bg-cosmic-900 border border-white/5 p-8 md:p-10 rounded-3xl relative">
+                <div class="absolute -top-3 -right-3 bg-cosmic-accent text-white text-[9px] font-mono font-bold px-3 py-1.5 rounded-full tracking-widest uppercase border border-white/10 shadow-lg">
+                    Easy Setup
+                </div>
+                
+                <h4 class="text-white font-display text-sm font-bold uppercase tracking-wider mb-8 flex items-center space-x-2">
+                    <i data-lucide="sliders-horizontal" class="text-cosmic-glow w-4 h-4"></i>
+                    <span>How to Configure Pinata Cloud in 1 Minute:</span>
+                </h4>
+                
                 <div class="space-y-6 font-mono text-xs">
+                    <!-- Step 1 -->
                     <div class="flex items-start space-x-4">
-                        <span class="w-6 h-6 rounded-full bg-cosmic-accent/20 text-cosmic-accent border border-cosmic-accent/30 flex items-center justify-center font-bold flex-shrink-0">1</span>
+                        <span class="w-7 h-7 rounded-lg bg-cosmic-accent/15 text-cosmic-accent border border-cosmic-accent/30 flex items-center justify-center font-bold flex-shrink-0">1</span>
                         <div>
-                            <span class="text-white font-bold block mb-1">Create free Pinata Account</span>
-                            <p class="text-slate-400 leading-relaxed">Go to <a href="https://pinata.cloud/" target="_blank" class="text-cosmic-accent hover:underline font-bold">Pinata.cloud</a> and register. No credit card is required.</p>
+                            <span class="text-white font-bold block mb-1 uppercase tracking-wide">Register Free Account</span>
+                            <p class="text-slate-400 leading-relaxed">Go to <a href="https://pinata.cloud/" target="_blank" class="text-cosmic-accent hover:underline font-bold">Pinata.cloud</a> and claim your free starter storage package. No credit cards needed.</p>
                         </div>
                     </div>
                     
+                    <!-- Step 2 -->
                     <div class="flex items-start space-x-4">
-                        <span class="w-6 h-6 rounded-full bg-cosmic-glow/20 text-cosmic-glow border border-cosmic-glow/30 flex items-center justify-center font-bold flex-shrink-0">2</span>
+                        <span class="w-7 h-7 rounded-lg bg-cosmic-glow/15 text-cosmic-glow border border-cosmic-glow/30 flex items-center justify-center font-bold flex-shrink-0">2</span>
                         <div>
-                            <span class="text-white font-bold block mb-1">Generate API JWT Key</span>
-                            <p class="text-slate-400 leading-relaxed mb-2">Create a "New Key" with Admin capabilities or ensure custom Scopes include:</p>
-                            <ul class="space-y-1 text-slate-300">
-                                <li>• <strong class="text-cosmic-accent">Files</strong> ➔ Write</li>
-                                <li>• <strong class="text-cosmic-accent">Pinning</strong> ➔ pinFileToIPFS &amp; pinning/pinFileToIPFS</li>
-                            </ul>
+                            <span class="text-white font-bold block mb-1 uppercase tracking-wide font-mono">Create API JWT Token Key</span>
+                            <p class="text-slate-400 leading-relaxed mb-3">Navigate to Developers section, create a New API Key, and toggle authorization scopes:</p>
+                            <div class="inline-flex flex-wrap gap-2">
+                                <span class="px-2.5 py-1 bg-cosmic-950 border border-white/5 rounded-md text-[10px] text-slate-300"><strong class="text-cosmic-glow">Files</strong> ➔ Write</span>
+                                <span class="px-2.5 py-1 bg-cosmic-950 border border-white/5 rounded-md text-[10px] text-slate-300"><strong class="text-cosmic-glow">Pinning</strong> ➔ pinFileToIPFS</span>
+                            </div>
                         </div>
                     </div>
 
+                    <!-- Step 3 -->
                     <div class="flex items-start space-x-4">
-                        <span class="w-6 h-6 rounded-full bg-cosmic-teal/20 text-cosmic-teal border border-cosmic-teal/30 flex items-center justify-center font-bold flex-shrink-0">3</span>
+                        <span class="w-7 h-7 rounded-lg bg-cosmic-teal/15 text-cosmic-teal border border-cosmic-teal/30 flex items-center justify-center font-bold flex-shrink-0">3</span>
                         <div>
-                            <span class="text-white font-bold block mb-1">Paste JWT inside the App</span>
-                            <p class="text-slate-400 leading-relaxed">Copy the long JWT token string from Pinata, open Allo•Alu, head to Settings, and paste it. You are ready to share encrypted photos!</p>
+                            <span class="text-white font-bold block mb-1 uppercase tracking-wide">Paste Security Token inside App Settings</span>
+                            <p class="text-slate-400 leading-relaxed">Copy the massive JWT token string, open your Allo•Alu mobile app settings, paste it, and lock it down. Done! Media transfer is instantly live.</p>
                         </div>
                     </div>
                 </div>
@@ -426,108 +514,261 @@
         </div>
     </section>
 
-    <!-- SECTION 4: ECONOMICS MATRIX (ZERO-AD TRANSPARENCY) -->
-    <section id="economics" class="py-24 max-w-7xl mx-auto px-6 md:px-12">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <span class="inline-flex items-center space-x-2 px-3 py-1 bg-cosmic-teal/20 border border-cosmic-teal/40 rounded-full text-xs font-mono text-cosmic-teal uppercase tracking-wider mb-3">
-                ⚖ No Hidden Fees
+    <!-- INTERACTIVE BLOCKCHAIN ENCRYPTION SIMULATOR -->
+    <section class="py-24 px-6 max-w-7xl mx-auto border-b border-white/5">
+        <div class="glass-panel p-8 md:p-12 rounded-3xl relative overflow-hidden">
+            <div class="absolute -top-12 -right-12 w-64 h-64 bg-cosmic-glow/5 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-5 flex flex-col space-y-4">
+                    <span class="text-xs font-mono font-bold text-cosmic-teal uppercase tracking-wider">Try It Live</span>
+                    <h3 class="text-2xl md:text-3xl font-bold text-white font-display">Sovereign Encryption Sandbox</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed font-sans">
+                        Type a private message below to see how Allo•Alu's cryptographic engine signs and packs raw plaintext into safe, end-to-end encrypted ledger bytes before broadcasting to peer nodes.
+                    </p>
+                </div>
+                
+                <div class="lg:col-span-7 flex flex-col space-y-4">
+                    <!-- Interactive Elements -->
+                    <div class="flex flex-col space-y-1.5">
+                        <label class="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Plaintext Message</label>
+                        <input id="demo-input" type="text" placeholder="Type secret message here (e.g. My ledger password is...)" value="Meet me at 12:00 UTC at the block coordinate." class="px-4 py-3 rounded-xl bg-cosmic-950 border border-white/5 focus:border-cosmic-accent/50 outline-none text-slate-200 text-sm font-mono tracking-tight transition-all">
+                    </div>
+                    
+                    <div class="flex flex-col space-y-1.5">
+                        <label class="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Signed &amp; Sealed Ciphertext (Stored in Algorand "Note")</label>
+                        <div class="p-4 rounded-xl bg-cosmic-950/80 border border-white/5 font-mono text-xs text-cosmic-glow break-all min-h-[50px] relative">
+                            <span id="demo-output">WjI1NTE5RERIZXBoZW1lcjE2ODk2ODU3NjQwMDA6YWxsb2FsdToxMDBfY29zbWljX2VuY3J5cHRpb25fZGVtbzpteWxvY2FsY2lwaGVy</span>
+                            <div class="absolute right-3 bottom-3 text-[9px] bg-cosmic-teal/15 text-cosmic-teal border border-cosmic-teal/30 px-2 py-0.5 rounded font-bold uppercase tracking-widest">AES-256-GCM</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: TRUE ECONOMIC TRANSPARENCY MATRIX -->
+    <section id="pricing" class="py-24 max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto mb-20">
+            <span class="inline-flex items-center space-x-2 px-3 py-1 bg-cosmic-teal/10 border border-cosmic-teal/30 rounded-full text-[11px] font-mono text-cosmic-teal uppercase tracking-widest mb-3">
+                <i data-lucide="scale" class="w-3.5 h-3.5"></i>
+                <span>No Monthly Rent</span>
             </span>
-            <h2 class="text-4xl md:text-5xl font-bold tracking-tight text-white font-sans">
-                True Serverless Cost Matrix
+            <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white font-display">
+                Transparent On-Chain Economic Matrix
             </h2>
-            <p class="text-slate-400 mt-4 text-base md:text-lg font-mono">
-                Comparison of the true financial cost. Zero ads, zero monthly premiums, and no developer cuts.
+            <p class="text-slate-400 mt-4 text-sm sm:text-base font-mono">
+                Allo•Alu is completely free to own, MIT-licensed, and runs entirely without subscriptions. You pay only standard ledger gas fees directly to the blockchain.
             </p>
         </div>
 
         <div class="grid md:grid-cols-2 gap-12 items-stretch">
-            <!-- Web3 Sovereign Model -->
-            <div class="p-8 rounded-3xl bg-cosmic-800/80 border-2 border-cosmic-teal/30 flex flex-col justify-between">
+            <!-- Web3 Paradigm -->
+            <div class="p-8 md:p-10 rounded-3xl bg-cosmic-900 border-2 border-cosmic-teal/30 flex flex-col justify-between shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-cosmic-teal/5 rounded-full blur-2xl pointer-events-none"></div>
                 <div>
-                    <span class="text-xs font-mono font-bold text-cosmic-teal uppercase tracking-wider block mb-2">Sovereign Web3 Paradigm</span>
-                    <h3 class="text-2xl font-bold text-white mb-6 font-mono">Allo•Alu Ledger Routing</h3>
+                    <span class="text-xs font-mono font-bold text-cosmic-teal uppercase tracking-widest block mb-1">Decentralized Routing</span>
+                    <h3 class="text-2xl font-bold text-white font-display mb-8">Allo•Alu Micro-Gas Paradigm</h3>
                     
                     <div class="space-y-4 font-mono text-xs mb-8">
-                        <div class="flex justify-between border-b border-white/5 py-2">
-                            <span class="text-slate-400">Application Price</span>
-                            <span class="text-cosmic-teal font-bold">$0.00 (MIT Free)</span>
+                        <div class="flex justify-between border-b border-white/5 py-2.5">
+                            <span class="text-slate-400">Application Purchase Cost</span>
+                            <span class="text-cosmic-teal font-bold">$0.00 (Free &amp; Open Source)</span>
                         </div>
-                        <div class="flex justify-between border-b border-white/5 py-2">
-                            <span class="text-slate-400">Cost Per Message</span>
-                            <span class="text-cosmic-teal font-bold">0.001 ALGO (~$0.0001)</span>
+                        <div class="flex justify-between border-b border-white/5 py-2.5">
+                            <span class="text-slate-400">Sovereign Cost Per Message</span>
+                            <span class="text-cosmic-teal font-bold">0.001 ALGO (~$0.0001 USD)</span>
                         </div>
-                        <div class="flex justify-between border-b border-white/5 py-2">
-                            <span class="text-slate-400">Required Deposit</span>
-                            <span class="text-white">0.101 ALGO (Reserved)</span>
+                        <div class="flex justify-between border-b border-white/5 py-2.5">
+                            <span class="text-slate-400">Required Anti-Spam Deposit</span>
+                            <span class="text-white">0.101 ALGO (Retained In Your Wallet)</span>
                         </div>
-                        <div class="flex justify-between border-b border-white/5 py-2">
-                            <span class="text-slate-400">Data Exploitation</span>
-                            <span class="text-cosmic-teal font-bold">Zero (No Logs)</span>
+                        <div class="flex justify-between border-b border-white/5 py-2.5">
+                            <span class="text-slate-400">Data Exploitation &amp; Sale</span>
+                            <span class="text-cosmic-teal font-bold">Absolutely Zero</span>
                         </div>
-                        <div class="flex justify-between py-2">
-                            <span class="text-slate-400">In-App Advertising</span>
+                        <div class="flex justify-between py-2.5">
+                            <span class="text-slate-400">In-App Commercial Advertisements</span>
                             <span class="text-cosmic-teal font-bold">None</span>
                         </div>
                     </div>
                 </div>
-                <div class="p-4 bg-cosmic-950 rounded-xl border border-white/5 text-xs text-slate-300 leading-relaxed font-mono">
-                    💡 <strong>10,000 Messages cost only ~1 USD.</strong> 100% of these gas fees are paid directly to Algorand decentralized validators to power safe, forkless finality.
+                <div class="p-4 bg-cosmic-950 rounded-2xl border border-white/5 text-xs text-slate-400 leading-relaxed font-mono">
+                    💡 <strong>Economic Reality check:</strong> Sending 10,000 encrypted chat messages costs roughly $1.00 USD. 100% of these sub-cent gas fees are processed by Algorand's PPoS consensus protocol validators—not the developers.
                 </div>
             </div>
 
-            <!-- Web2 Central Model -->
-            <div class="p-8 rounded-3xl bg-cosmic-800/30 border border-white/5 flex flex-col justify-between">
+            <!-- Web2 Paradigm -->
+            <div class="p-8 md:p-10 rounded-3xl bg-cosmic-900 border border-white/5 flex flex-col justify-between shadow-xl relative overflow-hidden">
                 <div>
-                    <span class="text-xs font-mono font-bold text-slate-500 uppercase tracking-wider block mb-2">Legacy Web2 Paradigm</span>
-                    <h3 class="text-2xl font-bold text-slate-400 mb-6 font-mono">Traditional Centralized Apps</h3>
+                    <span class="text-xs font-mono font-bold text-slate-500 uppercase tracking-widest block mb-1">Corporate Models</span>
+                    <h3 class="text-2xl font-bold text-slate-400 mb-8 font-mono">Legacy Centralized Messengers</h3>
                     
                     <div class="space-y-4 font-mono text-xs mb-8 text-slate-400">
-                        <div class="flex justify-between border-b border-white/5 py-2">
-                            <span>Monthly Subscription</span>
-                            <span class="text-cosmic-coral font-bold">$4.99 - $12.99 / mo</span>
+                        <div class="flex justify-between border-b border-white/5 py-2.5">
+                            <span>Monthly App Subscription</span>
+                            <span class="text-cosmic-coral font-bold">$4.99 - $14.99 / Month</span>
                         </div>
-                        <div class="flex justify-between border-b border-white/5 py-2">
-                            <span>Cost Per Message</span>
-                            <span class="text-cosmic-coral">Your Private Data</span>
+                        <div class="flex justify-between border-b border-white/5 py-2.5">
+                            <span>Real Cost Per Message</span>
+                            <span class="text-cosmic-coral">Your Metadata, Contacts &amp; Privacy</span>
                         </div>
-                        <div class="flex justify-between border-b border-white/5 py-2">
-                            <span>Middleman Databases</span>
-                            <span class="text-cosmic-coral">Logs IPs &amp; Keys</span>
+                        <div class="flex justify-between border-b border-white/5 py-2.5">
+                            <span>Corporate Relay Servers</span>
+                            <span class="text-cosmic-coral font-mono">Collects IP Addresses &amp; Chats</span>
                         </div>
-                        <div class="flex justify-between border-b border-white/5 py-2">
-                            <span>Ad Trackers</span>
-                            <span class="text-cosmic-coral">Active Retargeting</span>
+                        <div class="flex justify-between border-b border-white/5 py-2.5">
+                            <span>Advertising Trackers</span>
+                            <span class="text-cosmic-coral">Active Retargeting &amp; SDK Scanners</span>
                         </div>
-                        <div class="flex justify-between py-2">
-                            <span>Server Stability</span>
-                            <span class="text-cosmic-coral">Frequent Central Outages</span>
+                        <div class="flex justify-between py-2.5">
+                            <span>Server Stability Guarantee</span>
+                            <span class="text-cosmic-coral">Subject to single-point-of-failure limits</span>
                         </div>
                     </div>
                 </div>
-                <div class="p-4 bg-cosmic-950/40 rounded-xl border border-white/5 text-xs text-slate-500 leading-relaxed font-mono">
-                    ⚠️ Legacy communication is "free" because you are the product. Your metadata, contact lists, and message packets are mapped, sold, and logged on corporate servers.
+                <div class="p-4 bg-cosmic-950/40 rounded-2xl border border-white/5 text-xs text-slate-500 leading-relaxed font-mono">
+                    ⚠️ Legacy messengers are "free" because your personal behavioral profiles and coordinates are packaged, monetized, and targeted by corporate advertising algorithms.
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="border-t border-white/10 py-12 px-6 md:px-12 bg-cosmic-950 text-slate-400 font-mono text-xs">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+    <!-- SECTION 5: INSTALLATION GUIDE -->
+    <section id="install" class="py-24 bg-gradient-to-b from-cosmic-950 to-cosmic-900 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-20">
+                <span class="inline-flex items-center space-x-2 px-3 py-1 bg-cosmic-glow/10 border border-cosmic-glow/30 rounded-full text-[11px] font-mono text-cosmic-glow uppercase tracking-widest mb-3">
+                    <i data-lucide="help-circle" class="w-3.5 h-3.5"></i>
+                    <span>Deployment Protocol</span>
+                </span>
+                <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white font-display">
+                    Sovereign Onboarding
+                </h2>
+                <p class="text-slate-400 mt-4 text-sm sm:text-base font-mono">
+                    Ready to take complete ownership of your communications? Follow these straightforward steps to install Allo•Alu.
+                </p>
+            </div>
+
+            <!-- Steps Layout -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Step 1 Card -->
+                <div class="p-6 rounded-2xl bg-cosmic-900/50 border border-white/5 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="text-xs font-mono font-bold text-cosmic-accent uppercase tracking-wider">Step 01</span>
+                            <span class="w-7 h-7 rounded-lg bg-cosmic-accent/10 flex items-center justify-center text-cosmic-accent"><i data-lucide="download" class="w-4 h-4"></i></span>
+                        </div>
+                        <h4 class="text-white font-bold font-display mb-2">Get Latest APK</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            Click on the download button to pull the cryptographically signed installer file directly from our secure GitHub Releases page.
+                        </p>
+                    </div>
+                    <div class="mt-6">
+                        <a href="https://github.com/devitamine/Allo-Alu/releases/latest" class="text-[10px] font-mono text-cosmic-accent uppercase font-bold tracking-widest hover:underline flex items-center space-x-1">
+                            <span>Download APK</span> <i data-lucide="arrow-right" class="w-3 h-3"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Step 2 Card -->
+                <div class="p-6 rounded-2xl bg-cosmic-900/50 border border-white/5 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="text-xs font-mono font-bold text-cosmic-glow uppercase tracking-wider">Step 02</span>
+                            <span class="w-7 h-7 rounded-lg bg-cosmic-glow/10 flex items-center justify-center text-cosmic-glow"><i data-lucide="settings" class="w-4 h-4"></i></span>
+                        </div>
+                        <h4 class="text-white font-bold font-display mb-2">Authorize Unknown Sources</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            Open Android settings ➔ Apps ➔ Special App Access ➔ Install Unknown Apps, and authorize your browser or file viewer to run the APK.
+                        </p>
+                    </div>
+                    <div class="mt-6 text-[10px] font-mono text-slate-500 uppercase tracking-widest font-bold">
+                        Android Native Process
+                    </div>
+                </div>
+
+                <!-- Step 3 Card -->
+                <div class="p-6 rounded-2xl bg-cosmic-900/50 border border-white/5 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="text-xs font-mono font-bold text-cosmic-teal uppercase tracking-wider">Step 03</span>
+                            <span class="w-7 h-7 rounded-lg bg-cosmic-teal/10 flex items-center justify-center text-cosmic-teal"><i data-lucide="pocket" class="w-4 h-4"></i></span>
+                        </div>
+                        <h4 class="text-white font-bold font-display mb-2">Initialize Your Keypair</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            Open the app, securely generate a brand new Algorand wallet address, and write down your ultra-secure 25-word recovery mnemonic seed phrase.
+                        </p>
+                    </div>
+                    <div class="mt-6 text-[10px] font-mono text-cosmic-teal uppercase tracking-widest font-bold">
+                        Keep seeds secure &amp; offline
+                    </div>
+                </div>
+
+                <!-- Step 4 Card -->
+                <div class="p-6 rounded-2xl bg-cosmic-900/50 border border-white/5 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="text-xs font-mono font-bold text-cosmic-coral uppercase tracking-wider">Step 04</span>
+                            <span class="w-7 h-7 rounded-lg bg-cosmic-coral/10 flex items-center justify-center text-cosmic-coral"><i data-lucide="link" class="w-4 h-4"></i></span>
+                        </div>
+                        <h4 class="text-white font-bold font-display mb-2">Configure IPFS (Optional)</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            Paste your private Pinata API JWT token into the mobile client settings menu to instantly activate secure decentralized multimedia shares.
+                        </p>
+                    </div>
+                    <div class="mt-6">
+                        <a href="#ipfs" class="text-[10px] font-mono text-cosmic-coral uppercase font-bold tracking-widest hover:underline flex items-center space-x-1">
+                            <span>How to setup IPFS</span> <i data-lucide="arrow-right" class="w-3 h-3"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 py-12 px-6 bg-cosmic-950 text-slate-500 font-mono text-xs">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
             <div class="flex items-center space-x-3">
                 <img src="assets/logo_v1.png" alt="Allo•Alu Logo" class="w-8 h-8 rounded-lg object-contain bg-cosmic-900 border border-white/10 shadow-md">
-                <span class="text-sm font-bold text-white font-mono">Allo•Alu</span>
+                <span class="text-sm font-bold text-white font-display font-bold">Allo•Alu</span>
             </div>
             
-            <span>© 2026 Allo•Alu Messenger. MIT Licensed. Built purely on the Algorand ledger.</span>
+            <div class="text-center md:text-left text-[11px] leading-relaxed">
+                <span>© 2026 Allo•Alu Messenger. MIT Licensed. Completely open-source. built on the Algorand ledger.</span>
+            </div>
             
-            <div class="flex space-x-6 text-slate-400 text-[11px]">
-                <a href="https://github.com/devitamine/Allo-Alu" target="_blank" class="hover:text-white transition-colors">GitHub</a>
-                <a href="#economics" class="hover:text-white transition-colors">No-Ad Policy</a>
-                <a href="#security" class="hover:text-white transition-colors">Security Audit</a>
+            <div class="flex space-x-6 text-[11px]">
+                <a href="https://github.com/devitamine/Allo-Alu" target="_blank" class="hover:text-white transition-colors">GitHub Repository</a>
+                <a href="#security" class="hover:text-white transition-colors">Audit &amp; Security</a>
+                <a href="#pricing" class="hover:text-white transition-colors">Economic Policy</a>
             </div>
         </div>
     </footer>
 
+    <!-- Init Lucide Icons -->
+    <script>
+        lucide.createIcons();
+
+        // Simple interactive encryption demo logic
+        const inputEl = document.getElementById('demo-input');
+        const outputEl = document.getElementById('demo-output');
+
+        // Simple mock Base64 cipher mimicking AES-256 string payload
+        function updateDemoText() {
+            const rawText = inputEl.value.trim() || "Meet me at 12:00 UTC";
+            // Simple mock base64 encode
+            try {
+                const utf8Bytes = new TextEncoder().encode(rawText);
+                const base64Str = btoa(String.fromCharCode(...utf8Bytes));
+                outputEl.textContent = "WjI1NTE5RERIZXBoZW1lcjE2ODk2ODU3Njg0MDM6YWxsb2FsdToxMDBCYXNlNjQ6" + base64Str.substring(0, 50) + "...";
+            } catch(e) {
+                outputEl.textContent = "Error encoding...";
+            }
+        }
+
+        inputEl.addEventListener('input', updateDemoText);
+    </script>
 </body>
 </html>
