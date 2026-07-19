@@ -452,17 +452,18 @@
             <div class="lg:col-span-5 flex flex-col space-y-6">
                 <span class="inline-flex items-center space-x-2 px-3 py-1 bg-cosmic-accent/10 border border-cosmic-accent/30 rounded-full text-xs font-mono text-cosmic-accent uppercase tracking-widest max-w-max">
                     <i data-lucide="share-2" class="w-3.5 h-3.5"></i>
-                    <span>Decentralized Media Layer</span>
+                    <span>Decentralized Photo Layer</span>
                 </span>
                 <h2 class="text-3xl sm:text-5xl font-bold tracking-tight text-white font-display">
-                    P2P File &amp; Image Sharing with Pinata
+                    P2P Image &amp; Photo Sharing with Pinata
                 </h2>
                 <p class="text-slate-400 leading-relaxed text-sm sm:text-base font-sans">
-                    Traditional messengers store your private pictures, coordinates, and documents on their own centralized databases. Allo•Alu achieves pure Web3 sovereignty by using the InterPlanetary File System (IPFS) to distribute files securely across decentralized web nodes.
+                    Traditional messengers store your private pictures and sensitive metadata on their own centralized databases. Allo•Alu achieves pure Web3 sovereignty by using the InterPlanetary File System (IPFS) to distribute image uploads securely across decentralized web nodes. 
+                    <span class="text-cosmic-glow font-bold">Please note: Currently, media transfer is optimized strictly for highly secure photo/image sharing (PNG, JPG, JPEG, WEBP).</span>
                 </p>
                 <div class="p-4 bg-cosmic-950/60 rounded-xl border border-white/5 flex items-start space-x-3 text-xs text-cosmic-teal">
                     <i data-lucide="check-circle" class="w-4 h-4 mt-0.5 flex-shrink-0"></i>
-                    <span class="font-mono text-slate-300 leading-relaxed">No tracking, no data profiling, and absolute file finality. Only the verified recipient possessing your DH session key can decode and view your media.</span>
+                    <span class="font-mono text-slate-300 leading-relaxed">No tracking, no data profiling, and absolute photo finality. Only the verified recipient possessing your DH session key can decode and view your media.</span>
                 </div>
             </div>
 
@@ -504,8 +505,10 @@
                     <div class="flex items-start space-x-4">
                         <span class="w-7 h-7 rounded-lg bg-cosmic-teal/15 text-cosmic-teal border border-cosmic-teal/30 flex items-center justify-center font-bold flex-shrink-0">3</span>
                         <div>
-                            <span class="text-white font-bold block mb-1 uppercase tracking-wide">Paste Security Token inside App Settings</span>
-                            <p class="text-slate-400 leading-relaxed">Copy the massive JWT token string, open your Allo•Alu mobile app settings, paste it, and lock it down. Done! Media transfer is instantly live.</p>
+                            <span class="text-white font-bold block mb-1 uppercase tracking-wide">Paste JWT Token &amp; Dedicated Gateway URL</span>
+                            <p class="text-slate-400 leading-relaxed">
+                                You need two items for a complete integration: copy your massive <strong class="text-white">API JWT Token</strong>, and go to the <strong class="text-white font-bold">Gateways</strong> tab in your Pinata dashboard to copy your <strong class="text-cosmic-glow font-bold">Dedicated Gateway URL</strong> (e.g., <code class="text-slate-300 bg-cosmic-950 px-1 py-0.5 rounded font-mono">https://your-subdomain.mypinata.cloud</code>). Paste both in your Allo•Alu app settings to unlock secure, decentralized photo sharing!
+                            </p>
                         </div>
                     </div>
                 </div>
